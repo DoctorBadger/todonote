@@ -41,9 +41,9 @@ function NoteModal({ close, note }) {
       dispatch(
         editNote({
           id: note.id,
-          title: title,
+          title,
           items: filteredItems,
-        }),
+        })
       );
       toast.success("Note updated");
     } else {
@@ -55,54 +55,67 @@ function NoteModal({ close, note }) {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/40">
-      <div className="bg-white p-6 rounded-lg w-100">
-        <h2 className="text-xl font-semibold mb-4">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+
+      <div className="bg-white p-6 rounded-xl w-105 shadow-xl">
+
+        <h2 className="text-xl font-semibold mb-4 text-gray-800">
           {note ? "Edit Note" : "Add Note"}
         </h2>
 
-        {/* TITLE */}
         <input
-          className="w-full border p-2 rounded mb-4"
+          className="w-full border border-gray-300 p-2 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-green-500"
           placeholder="Note title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        {/* ITEMS */}
         {items.map((item, index) => (
           <div key={index} className="flex gap-2 mb-2">
+
             <input
-              className="flex-1 border p-2 rounded"
+              className="flex-1 border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="List item"
               value={item}
               onChange={(e) => updateItem(e.target.value, index)}
             />
 
-            <button className="text-red-500" onClick={() => removeItem(index)}>
+            <button
+              className="text-red-500 hover:text-red-700"
+              onClick={() => removeItem(index)}
+            >
               ✕
             </button>
+
           </div>
         ))}
 
-        <button onClick={addItem} className="text-blue-500 text-sm mb-4">
+        <button
+          onClick={addItem}
+          className="text-green-600 text-sm mb-4 hover:underline"
+        >
           + Add Item
         </button>
 
-        {/* ACTIONS */}
         <div className="flex justify-end gap-3">
-          <button onClick={close} className="px-3 py-1 border rounded">
+
+          <button
+            onClick={close}
+            className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100"
+          >
             Cancel
           </button>
 
           <button
             onClick={save}
-            className="px-4 py-1 bg-green-600 text-white rounded"
+            className="px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700"
           >
             Save
           </button>
+
         </div>
       </div>
+
     </div>
   );
 }

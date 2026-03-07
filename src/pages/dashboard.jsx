@@ -22,9 +22,9 @@ const Dashboard = () => {
 
       <div className="relative z-10 h-dvh">
 
-        <h1 className="text-4xl font-medium text-center mb-10">
+        <p className="text-6xl font-medium text-center text-black/70 mb-10 drop-shadow-6xl">
           Dashboard
-        </h1>
+        </p>
 
         {lastThree.length === 0 ? (
           <div className="flex items-center justify-center h-[60vh]">
@@ -47,7 +47,7 @@ const Dashboard = () => {
           </div>
         )}
 
-        <div className="flex justify-center mt-12">
+        <div className="flex justify-end mt-4">
           <button
             onClick={() => navigate("/todos")}
             className="bg-green-700 hover:bg-green-800 text-white px-5 py-2 rounded-lg transition"

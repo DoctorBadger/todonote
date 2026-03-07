@@ -16,6 +16,6 @@ export const store = configureStore({
 sagaMiddleware.run(rootSaga);
 
 store.subscribe(() => {
-  const state = store.getState();
-  localStorage.setItem("notes", JSON.stringify(state.todo.notes));
+  const notes = store.getState().todo.notes;
+  localStorage.setItem("notes", JSON.stringify(notes));
 });
