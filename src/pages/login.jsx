@@ -1,9 +1,39 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { login } from "../app/authSlice";
 
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleLogin() {
+    if (!email.trim()) {
+      toast.error("Please enter your email");
+      return;
+    }
+
+    if (!password.trim()) {
+      toast.error("Please enter your password");
+      return;
+    }
+
+    dispatch(
+      login({
+        email,
+        password,
+      }),
+    );
+
+    toast.success("Login Successful")
+
+    navigate("/dashboard");
+  }
 
   return (
     <AuthLayout>
@@ -17,7 +47,9 @@ function Login() {
 
       <input
         className="w-full border rounded-lg p-2 mt-1 mb-4 outline-none focus:ring-2 focus:ring-green-600 border-gray-400 drop-shadow-2xl opacity-50"
+        value={email}
         placeholder="Enter your email"
+        onChange={(e) => setEmail(e.target.value)}
       />
 
       <div className="flex justify-between items-center mb-1">
@@ -33,6 +65,8 @@ function Login() {
 
       <input
         type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         className="w-full border rounded-lg p-2 mt-1 mb-4 border-gray-400 drop-shadow-2xl outline-none focus:ring-2 focus:ring-green-600 opacity-50"
         placeholder="Enter your password"
       />
@@ -43,7 +77,7 @@ function Login() {
       </div>
 
       <button
-        onClick={() => navigate("/dashboard")}
+        onClick={handleLogin}
         className="w-full bg-[#3A5B22] text-white py-2 rounded-lg hover:bg-green-900 transition mb-6"
       >
         Login

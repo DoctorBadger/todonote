@@ -2,10 +2,13 @@ import { useDispatch } from "react-redux";
 import { deleteNote, deleteItem } from "../app/todoSlice";
 import { useState } from "react";
 import NoteModal from "./NoteModal";
+import DeleteModal from "./DeleteModal";
 
 function NoteCard({ note, onEdit }) {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
+  const [deleteNoteConfirm, setDeleteNoteConfirm] = useState(false);
+  const [deleteItemIndex, setDeleteItemIndex] = useState(null);
 
   return (
     <div className="bg-white shadow-md rounded-xl p-5 flex flex-col h-full hover:shadow-xl transition">
@@ -25,14 +28,7 @@ function NoteCard({ note, onEdit }) {
 
             <button
               className="text-red-400 hover:text-red-600 transition"
-              onClick={() =>
-                dispatch(
-                  deleteItem({
-                    noteId: note.id,
-                    index,
-                  }),
-                )
-              }
+              onClick={() => setDeleteItemIndex(index)}
             >
               ✕
             </button>
@@ -43,7 +39,7 @@ function NoteCard({ note, onEdit }) {
       <div className="flex gap-3 mt-4">
         <button
           className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm transition"
-          onClick={() => dispatch(deleteNote(note.id))}
+          onClick={() => setDeleteNoteConfirm(true)}
         >
           Delete
         </button>
@@ -60,6 +56,33 @@ function NoteCard({ note, onEdit }) {
       </div>
 
       {edit && <NoteModal note={note} close={() => setEdit(false)} />}
+      
+      {deleteNoteConfirm && (
+        <DeleteModal
+          message="Are you sure you want to delete this note?"
+          onCancel={() => setDeleteNoteConfirm(false)}
+          onConfirm={() => {
+            dispatch(deleteNote(note.id));
+            setDeleteNoteConfirm(false);
+          }}
+        />
+      )}
+
+      {deleteItemIndex !== null && (
+        <DeleteModal
+          message="Are you sure you want to delete this item?"
+          onCancel={() => setDeleteItemIndex(null)}
+          onConfirm={() => {
+            dispatch(
+              deleteItem({
+                noteId: note.id,
+                index: deleteItemIndex,
+              }),
+            );
+            setDeleteItemIndex(null);
+          }}
+        />
+      )}
     </div>
   );
 }
