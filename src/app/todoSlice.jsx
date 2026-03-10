@@ -1,16 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "@reduxjs/toolkit";
 
-let savedNotes = [];
-
-try {
-  savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
-} catch {
-  savedNotes = [];
-}
 
 const initialState = {
-  notes: savedNotes,
+  notes: [],
 };
 const todoSlice = createSlice({
   name: "todo",

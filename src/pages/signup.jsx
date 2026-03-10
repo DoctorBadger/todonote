@@ -29,7 +29,12 @@ function Signup() {
       return toast.error("Please agree to the terms and policy");
     }
 
-    dispatch(signup({name, email, password}));
+    dispatch(
+      signup({
+        name:name, 
+        email:email, 
+        password:password
+      }));
 
     toast.success("Account Created Successfully");
 

@@ -1,14 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../app/authSlice";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { currentUser, error } = useSelector((state) => state.auth);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,17 +26,19 @@ function Login() {
       return;
     }
 
-    dispatch(
-      login({
-        email,
-        password,
-      }),
-    );
-
-    toast.success("Login Successful")
-
-    navigate("/dashboard");
+    dispatch(login({ email, password }));
   }
+
+  useEffect(() => {
+    if (currentUser) {
+      toast.success("Login Successful");
+      navigate("/dashboard");
+    }
+
+    if (error) {
+      toast.error(error);
+    }
+  }, [currentUser, error, navigate]);
 
   return (
     <AuthLayout>
@@ -90,7 +95,7 @@ function Login() {
       </div>
 
       <div className="flex gap-4 mb-6">
-        <button className="flex items-center justify-center gap-2 border rounded-lg py-2 w-full hover:bg-gray-50 bg-white bg-blend-color border-gray-300 drop-shadow-2xl ">
+        <button className="flex items-center justify-center gap-2 border rounded-lg py-2 w-full hover:bg-gray-50 bg-white border-gray-300 drop-shadow-2xl">
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             className="w-4 h-4"
@@ -98,7 +103,7 @@ function Login() {
           <span className="text-sm text-medium">Sign in with Google</span>
         </button>
 
-        <button className="flex items-center justify-center gap-2 border rounded-lg py-2 w-full hover:bg-gray-50 bg-white bg-blend-color border-gray-300 drop-shadow-2xl ">
+        <button className="flex items-center justify-center gap-2 border rounded-lg py-2 w-full hover:bg-gray-50 bg-white border-gray-300 drop-shadow-2xl">
           <img
             src="https://www.svgrepo.com/show/511330/apple-173.svg"
             className="w-4 h-4"

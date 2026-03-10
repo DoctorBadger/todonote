@@ -3,15 +3,27 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   users: [],
   currentUser: null,
-  isAuthenticated: false,
+  error: null
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+
     signup: (state, action) => {
-      state.users.push(action.payload);
+      const { name, email, password } = action.payload;
+
+      const existingUser = state.users.find(
+        (user) => user.email === email
+      );
+
+      if (existingUser) {
+        state.error = "User already exists";
+      } else {
+        state.users.push({ name, email, password });
+        state.error = null;
+      }
     },
 
     login: (state, action) => {
@@ -23,15 +35,17 @@ const authSlice = createSlice({
 
       if (user) {
         state.currentUser = user;
-        state.isAuthenticated = true;
+        state.error = null;
+      } else {
+        state.error = "Invalid email or password";
       }
     },
 
     logout: (state) => {
       state.currentUser = null;
-      state.isAuthenticated = false;
-    },
-  },
+    }
+
+  }
 });
 
 export const { signup, login, logout } = authSlice.actions;
