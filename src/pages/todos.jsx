@@ -1,15 +1,51 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import NoteCard from "../components/NoteCard";
 import NoteModal from "../components/NoteModal";
+import { logout } from "../app/authSlice";
+import Avatar from "react-avatar";
 
 const Todos = () => {
   const notes = useSelector((state) => state.todo.notes);
+  const user = useSelector((state) => state.auth.currentUser);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [menu, setMenu] = useState(false);
+
+  function handleLogout() {
+    dispatch(logout());
+    navigate("/login");
+  }
 
   return (
-    <div className="min-h-dvh bg-gray-100 p-10">
-      <div className="flex justify-between mb-10">
+    <div className="min-h-dvh bg-gray-100 p-5">
+      <div className="flex justify-end p-4">
+        <Avatar
+          name={user?.name}
+          size="40"
+          round={true}
+          colour="#3A5B22"
+          textSizeRatio={2}
+          onClick={() => setMenu(!menu)}
+          className="cursor-pointer"
+        />
+        {menu && (
+          <div className="absolute right-6 top-16 w-40 shadow-lg rounded-lg border">
+            <p className="px-4 py-2 text-sm border-b bg-[#76b14c] rounded-t-xl">
+              {user?.name}
+            </p>
+            <button
+              onClick={handleLogout}
+              className="w-full text-left px-4 py-2 rounded-b-lg bg-red-500 hover:bg-red-600"
+            >
+              Logout
+            </button>
+          </div>
+        )}
+      </div>
+      <div className="flex justify-between mb-10 mt-10">
         <p></p>
         <h1 className="text-4xl font-semibold text-gray-800">To-Do Lists</h1>
 

@@ -3,6 +3,7 @@ import { deleteNote, deleteItem } from "../app/todoSlice";
 import { useState } from "react";
 import NoteModal from "./NoteModal";
 import DeleteModal from "./DeleteModal";
+import { Tooltip } from "react-tooltip";
 
 function NoteCard({ note, onEdit }) {
   const dispatch = useDispatch();
@@ -10,6 +11,10 @@ function NoteCard({ note, onEdit }) {
   const [deleteNoteConfirm, setDeleteNoteConfirm] = useState(false);
   const [deleteItemIndex, setDeleteItemIndex] = useState(null);
 
+  const preview =
+    deleteItemIndex !== null
+      ? note.items[deleteItemIndex].split(" ").slice(0, 3).join(" ")
+      : "";
   return (
     <div className="bg-white shadow-md rounded-xl p-5 flex flex-col h-full hover:shadow-xl transition">
       <h2 className="text-xl font-medium mb-1">{note.title}</h2>
@@ -56,10 +61,15 @@ function NoteCard({ note, onEdit }) {
       </div>
 
       {edit && <NoteModal note={note} close={() => setEdit(false)} />}
-      
+
       {deleteNoteConfirm && (
         <DeleteModal
-          message="Are you sure you want to delete this note?"
+          message={
+            <>
+              Are you sure you want to delete{" "}
+              <span className="font-bold underline">{note.title}</span> note?
+            </>
+          }
           onCancel={() => setDeleteNoteConfirm(false)}
           onConfirm={() => {
             dispatch(deleteNote(note.id));
@@ -70,7 +80,20 @@ function NoteCard({ note, onEdit }) {
 
       {deleteItemIndex !== null && (
         <DeleteModal
-          message="Are you sure you want to delete this item?"
+          message={
+            <>
+              Are you sure you want to delete the item :{" "}
+              <span
+                className="underline"
+                data-tooltip-id="item-tooltip"
+                data-tooltip-content={note.items[deleteItemIndex]}
+              >
+                {preview}...
+              </span>
+              ?
+              <Tooltip id="item-tooltip"/>
+            </>
+          }
           onCancel={() => setDeleteItemIndex(null)}
           onConfirm={() => {
             dispatch(
