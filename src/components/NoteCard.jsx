@@ -84,7 +84,6 @@ function NoteCard({ note, onEdit }) {
             <>
               Are you sure you want to delete the item :{" "}
               <span
-                className="underline"
                 data-tooltip-id="item-tooltip"
                 data-tooltip-content={note.items[deleteItemIndex]}
               >

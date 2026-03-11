@@ -13,11 +13,24 @@ const Todos = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState(false);
+  const [search, setSearch] = useState("");
 
   function handleLogout() {
     dispatch(logout());
     navigate("/login");
   }
+
+  const filteredNotes = notes.filter((note) => {
+    const query = search.toLowerCase();
+
+    const titleMatch = note.title.toLowerCase().includes(query);
+
+    const itemsMatch = note.items.some((item) =>
+      item.toLowerCase().includes(query),
+    );
+
+    return titleMatch || itemsMatch;
+  });
 
   return (
     <div className="min-h-dvh bg-gray-100 p-5">
@@ -63,7 +76,14 @@ const Todos = () => {
         </div>
       ) : (
         <div className="flex flex-wrap gap-6">
-          {notes.map((note) => (
+          <input
+            type="text"
+            placeholder="Search notes..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="border p-2 rounded-lg w-full mb-6"
+          />
+          {filteredNotes.map((note) => (
             <div key={note.id} className="w-80">
               <NoteCard note={note} />
             </div>

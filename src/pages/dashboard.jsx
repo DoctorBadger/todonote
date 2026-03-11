@@ -10,6 +10,7 @@ import Avatar from "react-avatar";
 const Dashboard = () => {
   const [editNote, setEditNote] = useState(null);
   const [menu, setMenu] = useState(false);
+  const [search, setSearch] = useState("");
   const notes = useSelector((state) => state.todo.notes);
   const user = useSelector((state) => state.auth.currentUser);
   const navigate = useNavigate();
@@ -20,6 +21,18 @@ const Dashboard = () => {
     dispatch(logout());
     navigate("/login");
   }
+
+  const filteredNotes = notes.filter((note) => {
+    const query = search.toLowerCase();
+
+    const titleMatch = note.title.toLowerCase().includes(query);
+
+    const itemsMatch = note.items.some((item) =>
+      item.toLowerCase().includes(query),
+    );
+
+    return titleMatch || itemsMatch;
+  });
 
   return (
     <div className="relative h-dvh lg:overflow-hidden overflow-y-auto overflow-x-hidden">

@@ -15,6 +15,18 @@ function Signup() {
 
   const dispatch = useDispatch();
 
+  function validateEmail(email) {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
+  }
+
+  function validatePassword(password) {
+    const pattern =
+      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
+
+    return pattern.test(password);
+  }
+
   function handleSignup() {
     if (!name.trim()) {
       return toast.error("Please enter your name");
@@ -28,13 +40,25 @@ function Signup() {
     if (!remember) {
       return toast.error("Please agree to the terms and policy");
     }
+    if (!validateEmail(email)) {
+      toast.error("Enter a valid email");
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      toast.error(
+        "Password must be 8 characters with uppercase, number and special character",
+      );
+      return;
+    }
 
     dispatch(
       signup({
-        name:name, 
-        email:email, 
-        password:password
-      }));
+        name: name,
+        email: email,
+        password: password,
+      }),
+    );
 
     toast.success("Account Created Successfully");
 
