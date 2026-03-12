@@ -10,7 +10,6 @@ import Avatar from "react-avatar";
 const Dashboard = () => {
   const [editNote, setEditNote] = useState(null);
   const [menu, setMenu] = useState(false);
-  const [search, setSearch] = useState("");
   const notes = useSelector((state) => state.todo.notes);
   const user = useSelector((state) => state.auth.currentUser);
   const navigate = useNavigate();
@@ -21,18 +20,6 @@ const Dashboard = () => {
     dispatch(logout());
     navigate("/login");
   }
-
-  const filteredNotes = notes.filter((note) => {
-    const query = search.toLowerCase();
-
-    const titleMatch = note.title.toLowerCase().includes(query);
-
-    const itemsMatch = note.items.some((item) =>
-      item.toLowerCase().includes(query),
-    );
-
-    return titleMatch || itemsMatch;
-  });
 
   return (
     <div className="relative h-dvh lg:overflow-hidden overflow-y-auto overflow-x-hidden">
@@ -70,12 +57,12 @@ const Dashboard = () => {
           Dashboard
         </p>
 
-        {lastThree.length === 0 ? (
-          <div className="flex items-center justify-center h-[60vh]">
-            <p className="text-7xl font-medium text-black/30 text-center">
+      {lastThree.length === 0 ? (
+        <div className="flex items-center justify-center h-[60vh]">
+          <p className="text-7xl font-medium text-black/30 text-center">
               No Notes Yet
-            </p>
-          </div>
+          </p>
+        </div>
         ) : (
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-stretch ml-5 mr-5">
             {lastThree.map((note) => (

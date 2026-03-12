@@ -20,12 +20,6 @@ function Login() {
     return pattern.test(email);
   }
 
-  function validatePassword(password) {
-    const pattern =
-      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
-    return pattern.test(password);
-  }
-
   function handleLogin() {
     if (!email.trim()) {
       toast.error("Please enter your email");
@@ -38,13 +32,6 @@ function Login() {
     }
     if (!validateEmail(email)) {
       toast.error("Enter a valid email");
-      return;
-    }
-
-    if (!validatePassword(password)) {
-      toast.error(
-        "Password must be 8 characters with uppercase, number and special character",
-      );
       return;
     }
 

@@ -1,9 +1,28 @@
 import AuthLayout from "../components/AuthLayout";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 function ForgotPassword() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState();
+
+  function validateEmail(email) {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
+  }
+
+  function handleForgot() {
+    if (!validateEmail(email)) {
+      return toast.error("Enter a valid email");
+    }
+
+    navigate("/resetpassword", {
+      state: { email: email },
+    });
+  }
+
   return (
     <AuthLayout>
       <h1 className="text-3xl font-medium mb-4">Forgot Your Password ?</h1>
@@ -11,21 +30,24 @@ function ForgotPassword() {
       <label className="text-sm text-medium">Email address</label>
 
       <input
+        type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         className="w-full border rounded-lg p-2 mt-1 mb-4 outline-none focus:ring-2 focus:ring-green-600 border-gray-400 drop-shadow-2xl opacity-50"
         placeholder="Enter your email"
       />
 
       <button
-        onClick={() => navigate("/resetpassword")}
+        onClick={handleForgot}
         className="w-full bg-[#3A5B22] text-white py-2 rounded-lg hover:bg-green-900 transition mb-6"
       >
         Reset Password
       </button>
       <div className="text-center mb-2">
-      <Link to="/login" className="font-medium text-[#0C2A92]">
-        Back To Login
-      </Link>
-    </div>
+        <Link to="/login" className="font-medium text-[#0C2A92]">
+          Back To Login
+        </Link>
+      </div>
       <div className="flex items-center mb-6">
         <div className="grow h-px bg-gray-300"></div>
         <span className="px-3 text-medium text-xs">Or</span>

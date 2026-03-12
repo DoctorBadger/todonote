@@ -15,6 +15,9 @@ function NoteCard({ note, onEdit }) {
     deleteItemIndex !== null
       ? note.items[deleteItemIndex].split(" ").slice(0, 3).join(" ")
       : "";
+
+  
+
   return (
     <div className="bg-white shadow-md rounded-xl p-5 flex flex-col h-full hover:shadow-xl transition">
       <h2 className="text-xl font-medium mb-1">{note.title}</h2>
@@ -86,6 +89,7 @@ function NoteCard({ note, onEdit }) {
               <span
                 data-tooltip-id="item-tooltip"
                 data-tooltip-content={note.items[deleteItemIndex]}
+                data-tooltip-place="right"
               >
                 {preview}...
               </span>

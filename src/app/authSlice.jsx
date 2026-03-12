@@ -43,11 +43,24 @@ const authSlice = createSlice({
 
     logout: (state) => {
       state.currentUser = null;
-    }
+    },
+
+    reset: (state, action) =>{
+      const{ email, password} = action.payload;
+      const user = state.users.find(
+        (u)=>u.email===email
+      )
+      if (user){
+        user.password = password
+        state.error = null
+      }else{
+        state.error= "User not found"
+      }
+    },
 
   }
 });
 
-export const { signup, login, logout } = authSlice.actions;
+export const { signup, login, logout, reset } = authSlice.actions;
 
 export default authSlice.reducer;
