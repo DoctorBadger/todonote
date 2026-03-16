@@ -18,6 +18,7 @@ const Todos = () => {
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState(null);
+  const [showUrgent, setShowUrgent] = useState(false);
 
   function handleLogout() {
     dispatch(logout());
@@ -34,6 +35,8 @@ const Todos = () => {
     );
 
     const searchMatch = titleMatch || itemsMatch;
+
+    if (showUrgent && !note.urgent) return false;
 
     if (!filter) return searchMatch;
 
@@ -87,27 +90,31 @@ const Todos = () => {
         </div>
       ) : (
         <div className="flex flex-wrap gap-6">
-         <div className="flex flex-wrap items-center gap-4 w-full mb-6">
-          <input
-            type="text"
-            placeholder="Search notes..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5B22]"
-          />
-          <DatePicker
-            selected={filter}
-            onChange={(date) => setFilter(date)}
-            placeholderText="Filter By Date"
-            dateFormat="dd/MM/yyyy"
-            className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5B22]"
-          />
-          <button
-            onClick={() => setFilter(null)}
-            className="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded-lg transition"
-          >
-            Clear Date
-          </button>
+          <div className="flex flex-wrap items-center gap-4 w-full mb-6">
+            <input
+              type="text"
+              placeholder="Search notes..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="flex-1 border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5B22]"
+            />
+            <DatePicker
+              showIcon
+              selected={filter}
+              onChange={(date) => setFilter(date)}
+              isClearable
+              placeholderText=" Filter By Date"
+              dateFormat="dd/MM/yyyy"
+              className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5B22]"
+            />
+            <button
+              onClick={() => setShowUrgent(!showUrgent)}
+              className={`px-4 py-2 rounded-lg ${
+                showUrgent ? "bg-red-500 text-white" : "bg-gray-300"
+              }`}
+            >
+              Urgent
+            </button>
           </div>
           {filteredNotes.map((note) => (
             <div key={note.id} className="w-80">

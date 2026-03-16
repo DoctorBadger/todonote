@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "@reduxjs/toolkit";
 
-
 const initialState = {
   notes: [],
 };
@@ -13,13 +12,14 @@ const todoSlice = createSlice({
       reducer: (state, action) => {
         state.notes.push(action.payload);
       },
-      prepare: (title, items) => {
+      prepare: (title, items, urgent = "false") => {
         return {
           payload: {
             id: nanoid(),
             title: title,
             items: items,
             date: Date.now(),
+            urgent,
           },
         };
       },
@@ -33,6 +33,7 @@ const todoSlice = createSlice({
         note.title = action.payload.title;
         note.items = action.payload.items;
         note.updated = Date.now();
+        note.urgent = action.payload.urgent;
       }
     },
     deleteItem: (state, action) => {

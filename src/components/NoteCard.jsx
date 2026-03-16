@@ -16,11 +16,14 @@ function NoteCard({ note, onEdit }) {
       ? note.items[deleteItemIndex].split(" ").slice(0, 3).join(" ")
       : "";
 
-  
-
   return (
     <div className="bg-white shadow-md rounded-xl p-5 flex flex-col h-full hover:shadow-xl transition">
       <h2 className="text-xl font-medium mb-1">{note.title}</h2>
+      {note.urgent && (
+        <span className="bg-red-500 text-white text-xs px-2 py-0.5 mb-1 rounded">
+          Urgent
+        </span>
+      )}
 
       <p className="text-xs text-gray-500 mb-3">
         {new Date(note.date).toLocaleDateString("en-GB")}
@@ -94,7 +97,7 @@ function NoteCard({ note, onEdit }) {
                 {preview}...
               </span>
               ?
-              <Tooltip id="item-tooltip"/>
+              <Tooltip id="item-tooltip" />
             </>
           }
           onCancel={() => setDeleteItemIndex(null)}
