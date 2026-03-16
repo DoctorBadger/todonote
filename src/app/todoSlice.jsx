@@ -40,9 +40,12 @@ const todoSlice = createSlice({
       const note = state.notes.find((n) => n.id === action.payload.noteId);
       if (note) note.items.splice(action.payload.index, 1);
     },
+    reorderNotes: (state, action) => {
+      state.notes = action.payload;
+    },
   },
 });
 
-export const { addNote, deleteNote, editNote, deleteItem } = todoSlice.actions;
+export const { addNote, deleteNote, editNote, deleteItem, reorderNotes } = todoSlice.actions;
 
 export default todoSlice.reducer;

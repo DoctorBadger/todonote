@@ -6,6 +6,8 @@ import NoteModal from "../components/NoteModal";
 import { logout } from "../app/authSlice";
 import Avatar from "react-avatar";
 import DatePicker from "react-datepicker";
+import { reorderNotes } from "../app/todoSlice";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -23,6 +25,18 @@ const Todos = () => {
   function handleLogout() {
     dispatch(logout());
     navigate("/login");
+  }
+
+  function handleDragEnd(result) {
+    if (!result.destination) return;
+
+    const newNotes = Array.from(filteredNotes);
+
+    const [moved] = newNotes.splice(result.source.index, 1);
+
+    newNotes.splice(result.destination.index, 0, moved);
+
+    dispatch(reorderNotes(newNotes));
   }
 
   const filteredNotes = notes.filter((note) => {
@@ -116,11 +130,39 @@ const Todos = () => {
               Urgent
             </button>
           </div>
-          {filteredNotes.map((note) => (
-            <div key={note.id} className="w-80">
-              <NoteCard note={note} />
-            </div>
-          ))}
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="notes">
+              {(provided) => (
+                <div
+                  className="flex flex-wrap gap-6"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {filteredNotes.map((note, index) => (
+                    <Draggable
+                      key={note.id}
+                      draggableId={note.id}
+                      index={index}
+                      className="w-80 cursor-grab active:cursor-grabbing"
+                    >
+                      {(provided) => (
+                        <div
+                          className="w-80"
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <NoteCard note={note} />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         </div>
       )}
 
