@@ -7,7 +7,13 @@ import { logout } from "../app/authSlice";
 import Avatar from "react-avatar";
 import DatePicker from "react-datepicker";
 import { reorderNotes } from "../app/todoSlice";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import {
+  SortableContext,
+  rectSortingStrategy,
+  arrayMove,
+} from "@dnd-kit/sortable";
+import SortableNote from "../components/SortableNote";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -27,14 +33,15 @@ const Todos = () => {
     navigate("/login");
   }
 
-  function handleDragEnd(result) {
-    if (!result.destination) return;
+  function handleDragEnd(event) {
+    const { active, over } = event;
 
-    const newNotes = Array.from(filteredNotes);
+    if (!over || active.id === over.id) return;
 
-    const [moved] = newNotes.splice(result.source.index, 1);
+    const oldIndex = notes.findIndex((n) => n.id === active.id);
+    const newIndex = notes.findIndex((n) => n.id === over.id);
 
-    newNotes.splice(result.destination.index, 0, moved);
+    const newNotes = arrayMove(notes, oldIndex, newIndex);
 
     dispatch(reorderNotes(newNotes));
   }
@@ -130,39 +137,21 @@ const Todos = () => {
               Urgent
             </button>
           </div>
-          <DragDropContext onDragEnd={handleDragEnd}>
-            <Droppable droppableId="notes">
-              {(provided) => (
-                <div
-                  className="flex flex-wrap gap-6"
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
-                  {filteredNotes.map((note, index) => (
-                    <Draggable
-                      key={note.id}
-                      draggableId={note.id}
-                      index={index}
-                      className="w-80 cursor-grab active:cursor-grabbing"
-                    >
-                      {(provided) => (
-                        <div
-                          className="w-80"
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <NoteCard note={note} />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
+          <DndContext
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext
+              items={filteredNotes.map((note) => note.id)}
+              strategy={rectSortingStrategy}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredNotes.map((note) => (
+                  <SortableNote key={note.id} note={note} />
+                ))}
+              </div>
+            </SortableContext>
+          </DndContext>
         </div>
       )}
 
