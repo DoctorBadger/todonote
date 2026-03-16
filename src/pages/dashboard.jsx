@@ -4,7 +4,7 @@ import { useState } from "react";
 import { logout } from "../app/authSlice";
 import NoteCard from "../components/NoteCard";
 import NoteModal from "../components/NoteModal";
-import plant2 from "../assets/plant2.jpg";
+import bg from "../assets/bg.jpg";
 import Avatar from "react-avatar";
 
 const Dashboard = () => {
@@ -24,8 +24,8 @@ const Dashboard = () => {
   return (
     <div className="relative h-dvh lg:overflow-hidden overflow-y-auto overflow-x-hidden">
       <div
-        className="absolute inset-0 bg-cover bg-center blur-sm scale-105"
-        style={{ backgroundImage: `url(${plant2})` }}
+        className="absolute inset-0 bg-cover bg-center scale-105"
+        style={{ backgroundImage: `url(${bg})` }}
       />
 
       <div className="relative min-h-dvh pb-28">

@@ -5,6 +5,9 @@ import NoteCard from "../components/NoteCard";
 import NoteModal from "../components/NoteModal";
 import { logout } from "../app/authSlice";
 import Avatar from "react-avatar";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const Todos = () => {
   const notes = useSelector((state) => state.todo.notes);
@@ -14,6 +17,7 @@ const Todos = () => {
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState(null);
 
   function handleLogout() {
     dispatch(logout());
@@ -29,7 +33,14 @@ const Todos = () => {
       item.toLowerCase().includes(query),
     );
 
-    return titleMatch || itemsMatch;
+    const searchMatch = titleMatch || itemsMatch;
+
+    if (!filter) return searchMatch;
+
+    const noteDate = new Date(note.date).toDateString();
+    const selectedDate = filter.toDateString();
+
+    return searchMatch && noteDate === selectedDate;
   });
 
   return (
@@ -76,13 +87,28 @@ const Todos = () => {
         </div>
       ) : (
         <div className="flex flex-wrap gap-6">
+         <div className="flex flex-wrap items-center gap-4 w-full mb-6">
           <input
             type="text"
             placeholder="Search notes..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border p-2 rounded-lg w-full mb-6"
+            className="flex-1 border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5B22]"
           />
+          <DatePicker
+            selected={filter}
+            onChange={(date) => setFilter(date)}
+            placeholderText="Filter By Date"
+            dateFormat="dd/MM/yyyy"
+            className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3A5B22]"
+          />
+          <button
+            onClick={() => setFilter(null)}
+            className="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded-lg transition"
+          >
+            Clear Date
+          </button>
+          </div>
           {filteredNotes.map((note) => (
             <div key={note.id} className="w-80">
               <NoteCard note={note} />
