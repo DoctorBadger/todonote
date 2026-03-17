@@ -1,5 +1,7 @@
+import { createPortal } from "react-dom";
+
 function DeleteModal({ message, onConfirm, onCancel }) {
-  return (
+  return createPortal(
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50">
       <div className="bg-white p-6 rounded-xl shadow-xl w-80 text-center">
 
@@ -30,7 +32,8 @@ function DeleteModal({ message, onConfirm, onCancel }) {
         </div>
 
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

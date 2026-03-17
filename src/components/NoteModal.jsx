@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { addNote, editNote } from "../app/todoSlice";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import {createPortal} from "react-dom";
 
 function NoteModal({ close, note }) {
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ function NoteModal({ close, note }) {
     close();
   }
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="bg-white p-6 rounded-xl w-105 shadow-xl">
         <h2 className="text-xl font-semibold mb-4 text-gray-800">
@@ -119,7 +120,8 @@ function NoteModal({ close, note }) {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
