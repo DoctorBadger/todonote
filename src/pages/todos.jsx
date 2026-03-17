@@ -25,7 +25,8 @@ const Todos = () => {
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState(null);
+  const [filter, setFilter] = useState([null, null]);
+  const [start, end] = filter;
   const [showUrgent, setShowUrgent] = useState(false);
 
   function handleLogout() {
@@ -59,12 +60,16 @@ const Todos = () => {
 
     if (showUrgent && !note.urgent) return false;
 
-    if (!filter) return searchMatch;
+    if (!start || !end) return searchMatch;
 
-    const noteDate = new Date(note.date).toDateString();
-    const selectedDate = filter.toDateString();
+    const noteDate = new Date(note.date)
+    
 
-    return searchMatch && noteDate === selectedDate;
+    return (
+      searchMatch &&
+      noteDate >= new Date(start) &&
+      noteDate <= new Date(end)
+    );
   });
 
   return (
@@ -121,7 +126,9 @@ const Todos = () => {
             />
             <DatePicker
               showIcon
-              selected={filter}
+              selectsRange
+              startDate={start}
+              endDate={end}
               onChange={(date) => setFilter(date)}
               isClearable
               placeholderText=" Filter By Date"
