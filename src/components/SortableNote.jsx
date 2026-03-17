@@ -22,10 +22,9 @@ function SortableNote({ note }) {
       ref={setNodeRef}
       style={style}
       {...attributes}
-      {...listeners}
       className="w-80 cursor-grab active:cursor-grabbing"
     >
-      <NoteCard note={note} />
+      <NoteCard note={note} listeners={listeners}/>
     </div>
   );
 }
