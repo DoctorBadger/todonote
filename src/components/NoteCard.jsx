@@ -19,7 +19,7 @@ function NoteCard({ note, onEdit, listeners }) {
       : "";
 
   return (
-    <div className="w-80 h-80 perspective">
+    <div className="flex flex-row max-h-dvh min-h-96 h-full perspective">
       <div
         className={`relative w-full h-full transition-transform duration-500 preserve-3d ${
           flipped ? "rotate-y-180" : ""

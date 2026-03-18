@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import NoteCard from "../components/NoteCard";
 import NoteModal from "../components/NoteModal";
 import { logout } from "../app/authSlice";
 import Avatar from "react-avatar";

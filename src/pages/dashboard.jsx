@@ -28,7 +28,7 @@ const Dashboard = () => {
         style={{ backgroundImage: `url(${bg})` }}
       />
 
-      <div className="relative min-h-dvh pb-28">
+      <div className="relative min-h-dvh mt-4 pb-28">
         <div className="flex justify-end p-4">
           <Avatar
             name={user?.name}
