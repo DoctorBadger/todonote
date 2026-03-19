@@ -123,7 +123,9 @@ function Login() {
 
       <p className="text-xs text-black text-center">
         Don't have an account?
-        <Link className="text-[#0C2A92] font-medium ml-1" to="/">
+        <Link 
+        className="text-[#0C2A92] font-medium ml-1" 
+        to="/signup">
           Sign Up
         </Link>
       </p>

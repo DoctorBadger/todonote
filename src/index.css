@@ -1,5 +1,55 @@
 @import "tailwindcss";
 
+@theme {
+  --font-display: "Crimson Text", serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-mono: "Roboto Mono", monospace;
+}
+
+@layer components {
+  .display {
+    font-family: var(--font-display);
+    font-size: 160px;
+    line-height: 0.9;
+  }
+
+  .h1 {
+    font-family: var(--font-display);
+    font-size: 60px;
+    line-height: 0.9;
+  }
+
+  .h2 {
+    font-family: var(--font-display);
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .link {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .caption {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.4;
+  }
+}
+
 :root {
   font-family: "Poppins", sans-serif;
   line-height: 1.5;

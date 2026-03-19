@@ -21,7 +21,7 @@
     "@mui/material": "^7.3.9",
     "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^2.11.2",
-    "@tailwindcss/vite": "^4.2.1",
+    "@tailwindcss/vite": "^4.2.2",
     "bootstrap": "^5.3.8",
     "nanoid": "^5.1.6",
     "react": "^19.2.0",
@@ -51,7 +51,7 @@
     "globals": "^16.5.0",
     "postcss": "^8.5.8",
     "sass": "^1.97.3",
-    "tailwindcss": "^4.2.1",
+    "tailwindcss": "^4.2.2",
     "vite": "^7.3.1"
   }
 }
