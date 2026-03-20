@@ -4,6 +4,7 @@ import { useState } from "react";
 import NoteModal from "./NoteModal";
 import DeleteModal from "./DeleteModal";
 import { Tooltip } from "react-tooltip";
+import { useSpring, a } from "@react-spring/web";
 
 function NoteCard({ note, onEdit, listeners }) {
   const dispatch = useDispatch();
@@ -18,16 +19,28 @@ function NoteCard({ note, onEdit, listeners }) {
       ? note.items[deleteItemIndex].split(" ").slice(0, 3).join(" ")
       : "";
 
+  const { transform } = useSpring({
+    transform: `rotateY(${flipped ? 180 : 0}deg)`,
+    config: { tension: 180, friction: 18 },
+  });
+
   return (
     <div className="flex flex-row max-h-dvh min-h-96 h-full perspective">
-      <div
-        className={`relative w-full h-full transition-transform duration-500 preserve-3d ${
-          flipped ? "rotate-y-180" : ""
-        }`}
+      
+      <a.div
+        style={{
+          transform,
+          transformStyle: "preserve-3d",
+          width: "100%",
+          height: "100%",
+        }}
+        className="relative"
       >
 
-        <div className="absolute w-full h-full backface-hidden bg-white shadow-md rounded-xl p-5 flex flex-col hover:shadow-xl transition">
-
+        <div
+          className="absolute w-full h-full bg-white shadow-md rounded-xl p-5 flex flex-col hover:shadow-xl transition"
+          style={{ backfaceVisibility: "hidden" }}
+        >
           <div {...listeners} className="cursor-grab active:cursor-grabbing">
             <h2 className="text-xl font-medium mb-1">☰ {note.title}</h2>
           </div>
@@ -64,7 +77,6 @@ function NoteCard({ note, onEdit, listeners }) {
           </ul>
 
           <div className="flex gap-2 mt-4 flex-wrap">
-
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -98,8 +110,13 @@ function NoteCard({ note, onEdit, listeners }) {
           </div>
         </div>
 
-        <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-gray-100 shadow-md rounded-xl p-5 flex flex-col">
-
+        <div
+          className="absolute w-full h-full bg-gray-100 shadow-md rounded-xl p-5 flex flex-col"
+          style={{
+            transform: "rotateY(180deg)",
+            backfaceVisibility: "hidden",
+          }}
+        >
           <h2 className="text-xl font-semibold mb-3">{note.title}</h2>
 
           <ul className="flex flex-col gap-2 flex-1 overflow-y-auto text-sm">
@@ -118,13 +135,12 @@ function NoteCard({ note, onEdit, listeners }) {
               e.stopPropagation();
               setFlipped(false);
             }}
-            className="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-md text-sm  "
+            className="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-md text-sm"
           >
             Back
           </button>
         </div>
-      </div>
-
+      </a.div>
 
       {edit && <NoteModal note={note} close={() => setEdit(false)} />}
 

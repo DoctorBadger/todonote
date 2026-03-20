@@ -20,6 +20,7 @@
     "@mui/icons-material": "^7.3.9",
     "@mui/material": "^7.3.9",
     "@popperjs/core": "^2.11.8",
+    "@react-spring/web": "^10.0.3",
     "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.2.2",
     "bootstrap": "^5.3.8",
