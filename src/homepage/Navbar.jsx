@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import {motion} from "framer-motion"
+import { navbarAnim } from "../animations/variants";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -15,7 +17,11 @@ function Navbar() {
   }, []);
 
   return (
-    <div
+    <motion.div
+    variants={navbarAnim}
+    initial="hidden"
+    animate="visible"
+    transition={{duration:0.4}}
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 flex justify-center ${
         scrolled ? "pt-4" : ""
       }`}
@@ -30,10 +36,10 @@ function Navbar() {
         {!scrolled && <h1 className="p text-2xl mr-24">Area</h1>}
 
         <div className="flex gap-6">
-          <a className="link font-bold cursor-pointer">Benefits</a>
-          <a className="link font-bold cursor-pointer">Specifications</a>
-          <a className="link font-bold cursor-pointer">How-To</a>
-          <a className="link font-bold cursor-pointer">Contact Us</a>
+          <a href="#benefits" className="link font-bold cursor-pointer">Benefits</a>
+          <a href="#specs" className="link font-bold cursor-pointer">Specifications</a>
+          <a href="#how" className="link font-bold cursor-pointer">How-To</a>
+          <a href="#contact" className="link font-bold cursor-pointer">Contact Us</a>
         </div>
 
         {!scrolled && (
@@ -53,7 +59,7 @@ function Navbar() {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

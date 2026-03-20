@@ -18,7 +18,8 @@ const Dashboard = () => {
 
   function handleLogout() {
     dispatch(logout());
-    navigate("/login");
+    navigate("/");
+    return;
   }
 
   return (

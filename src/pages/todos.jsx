@@ -30,7 +30,8 @@ const Todos = () => {
 
   function handleLogout() {
     dispatch(logout());
-    navigate("/login");
+    navigate("/");
+    return;
   }
 
   function handleDragEnd(event) {
