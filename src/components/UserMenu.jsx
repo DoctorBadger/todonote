@@ -53,7 +53,6 @@ function UserMenu({ user, onLogout }) {
               borderRadius: "14px",
               p: 1,
               minWidth: 170,
-              boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
             },
           },
         }}

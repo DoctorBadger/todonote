@@ -3,9 +3,9 @@ function Footer() {
     <footer className=" px-12 pb-8">
 
       <div className="flex gap-8 text-sm font-medium mb-16">
-        <a className="cursor-pointer hover:opacity-70">Benefits</a>
-        <a className="cursor-pointer hover:opacity-70">Specifications</a>
-        <a className="cursor-pointer hover:opacity-70">How-to</a>
+        <a href="#benefits" className="cursor-pointer hover:opacity-70">Benefits</a>
+        <a href="#specs" className="cursor-pointer hover:opacity-70">Specifications</a>
+        <a href="#how" className="cursor-pointer hover:opacity-70">How-to</a>
       </div>
 
       <div className="flex justify-between items-end">

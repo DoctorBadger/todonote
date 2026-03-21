@@ -1,5 +1,5 @@
 import AuthLayout from "../components/AuthLayout";
-import { TextField, Button, Box } from "@mui/material";
+import { TextField, Button, Box, Typography } from "@mui/material";
 import { useState } from "react";
 
 function ContactUs() {
@@ -36,39 +36,89 @@ function ContactUs() {
           gap: 3,
         }}
       >
-        <h1 className="text-5xl">Get In Touch</h1>
+        <h2 className="text-4xl">Get In Touch</h2>
+        <h3>We would love to hear from you!</h3>
 
-        <h2>We would love to hear from you!</h2>
+        <Box>
+          <Typography
+            fontFamily={"Poppins, sans-serif"}
+            fontSize={14}
+            fontWeight={600}
+            mb={0.5}
+          >
+            Name
+          </Typography>
+          <TextField
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Enter your name"
+            fullWidth
+            required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "12px",
+              },
+              fontFamily: "Poppins, sans-serif",
+              fontSize: "14px",
+            }}
+          />
+        </Box>
 
-        <TextField
-          label="Name"
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          fullWidth
-          required
-        />
+        <Box>
+          <Typography
+            fontFamily={"Poppins, sans-serif"}
+            fontSize={14}
+            fontWeight={600}
+            mb={0.5}
+          >
+            Email
+          </Typography>
+          <TextField
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Enter your email"
+            fullWidth
+            required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "12px",
+              },
+              fontFamily: "Poppins, sans-serif",
+              fontSize: "14px",
+            }}
+          />
+        </Box>
 
-        <TextField
-          label="Email"
-          name="email"
-          type="email"
-          value={form.email}
-          onChange={handleChange}
-          fullWidth
-          required
-        />
-
-        <TextField
-          label="Message"
-          name="message"
-          value={form.message}
-          onChange={handleChange}
-          multiline
-          rows={4}
-          fullWidth
-          required
-        />
+        <Box>
+          <Typography
+            fontFamily={"Poppins, sans-serif"}
+            fontSize={14}
+            fontWeight={600}
+            mb={0.5}
+          >
+            Message
+          </Typography>
+          <TextField
+            name="message"
+            value={form.message}
+            onChange={handleChange}
+            placeholder="Write your message..."
+            multiline
+            rows={4}
+            fullWidth
+            required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "12px",
+              },
+              fontFamily: "Poppins, sans-serif",
+              fontSize: "14px",
+            }}
+          />
+        </Box>
 
         <Button
           type="submit"
@@ -82,6 +132,7 @@ function ContactUs() {
             paddingY: "10px",
             textTransform: "none",
             fontSize: "14px",
+            borderRadius: "12px",
           }}
         >
           Send Message

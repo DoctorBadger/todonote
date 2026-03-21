@@ -12,6 +12,8 @@ import {
   arrayMove,
 } from "@dnd-kit/sortable";
 import SortableNote from "../components/SortableNote";
+import UserMenu from "../components/UserMenu";
+
 
 import "react-datepicker/dist/react-datepicker.css";
 
