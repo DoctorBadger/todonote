@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { slideUp } from "../animations/variants";
+import { useNavigate } from "react-router-dom";
 function Contact() {
+  const navigate=useNavigate();
   return (
     <section id="contact">
       <div className="pt-24 pb-12 px-12">
@@ -17,7 +19,9 @@ function Contact() {
             Schedule a quick call to learn how Area can turn your regional data
             into a powerful advantage.
           </p>
-          <button className="p font-bold px-80 py-5 bg-[#485C11] text-white rounded-full hover:bg-[#dfecc6] hover:text-black transition cursor-pointer">
+          <button 
+          onClick={()=>navigate("/contactus")}
+          className="p font-bold px-80 py-5 bg-[#485C11] text-white rounded-full hover:bg-[#dfecc6] hover:text-black transition cursor-pointer">
             Learn More
           </button>
         </motion.div>

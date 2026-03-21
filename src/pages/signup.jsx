@@ -21,12 +21,15 @@ function Signup() {
   }
 
   function validatePassword(password) {
-    const pattern =/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
+    const pattern =
+      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
 
     return pattern.test(password);
   }
 
-  function handleSignup() {
+  function handleSignup(e) {
+    e.preventDefault();
+
     if (!name.trim()) {
       return toast.error("Please enter your name");
     }
@@ -68,53 +71,53 @@ function Signup() {
     <AuthLayout>
       <div className="max-w-md w-full">
         <h1 className="text-3xl font-medium mb-8">Get Started Now</h1>
-
-        <label className="text-sm text-medium">Name</label>
-        <input
-          type="text"
-          value={name}
-          placeholder="Enter your name"
-          className="w-full border rounded-lg p-2 mt-1 mb-4 border-gray-400 drop-shadow-2xl outline-none focus:ring-2 focus:ring-green-600 opacity-50"
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <label className="text-sm text-medium">Email address</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
-          className="w-full border rounded-lg p-2 mt-1 mb-4 outline-none focus:ring-2 focus:ring-green-600 border-gray-400 drop-shadow-2xl opacity-50"
-        />
-
-        <label className="text-sm text-medium">Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your password"
-          className="w-full border rounded-lg p-2 mt-1 mb-4 border-gray-400 drop-shadow-2xl outline-none focus:ring-2 focus:ring-green-600 opacity-50"
-        />
-
-        <div className="flex items-center mb-6">
+        <form onSubmit={handleSignup}>
+          <label className="text-sm text-medium">Name</label>
           <input
-            type="checkbox"
-            checked={remember}
-            onChange={(e) => setRemember(e.target.checked)}
-            className="mr-2 w-4 h-4  rounded "
+            type="text"
+            value={name}
+            placeholder="Enter your name"
+            className="w-full border rounded-lg p-2 mt-1 mb-4 border-gray-400 drop-shadow-2xl outline-none focus:ring-2 focus:ring-green-600 opacity-50"
+            onChange={(e) => setName(e.target.value)}
           />
-          <p className="text-xs text-medium">
-            I agree to the <u>terms & policy</u>
-          </p>
-        </div>
 
-        <button
-          onClick={handleSignup}
-          className="w-full bg-[#3A5B22] text-white py-2 rounded-lg hover:bg-green-900 transition mb-6"
-        >
-          Signup
-        </button>
+          <label className="text-sm text-medium">Email address</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            className="w-full border rounded-lg p-2 mt-1 mb-4 outline-none focus:ring-2 focus:ring-green-600 border-gray-400 drop-shadow-2xl opacity-50"
+          />
 
+          <label className="text-sm text-medium">Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            className="w-full border rounded-lg p-2 mt-1 mb-4 border-gray-400 drop-shadow-2xl outline-none focus:ring-2 focus:ring-green-600 opacity-50"
+          />
+
+          <div className="flex items-center mb-6">
+            <input
+              type="checkbox"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+              className="mr-2 w-4 h-4  rounded "
+            />
+            <p className="text-xs text-medium">
+              I agree to the <u>terms & policy</u>
+            </p>
+          </div>
+
+          <button
+            onClick={handleSignup}
+            className="w-full bg-[#3A5B22] text-white py-2 rounded-lg hover:bg-green-900 transition mb-6"
+          >
+            Signup
+          </button>
+        </form>
         <div className="flex items-center mb-6">
           <div className="grow h-px bg-gray-300"></div>
           <span className="px-3 text-black text-sm">Or</span>

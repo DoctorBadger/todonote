@@ -8,7 +8,8 @@ const logos = [
   "/logo5.svg",
   "/logo6.svg",
 ];
-const extendedLogos = [...logos, ,...logos, ,...logos];
+
+const extendedLogos = [...logos, ...logos, ...logos];
 
 function LogosCarousel() {
   const [emblaRef] = useEmblaCarousel({
@@ -16,7 +17,6 @@ function LogosCarousel() {
     align: "start",
     dragFree: true,
   });
-
 
   return (
     <div className="overflow-hidden mt-16" ref={emblaRef}>

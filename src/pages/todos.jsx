@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import NoteModal from "../components/NoteModal";
 import { logout } from "../app/authSlice";
-import Avatar from "react-avatar";
 import DatePicker from "react-datepicker";
 import { reorderNotes } from "../app/todoSlice";
 import { DndContext, closestCenter } from "@dnd-kit/core";
@@ -22,7 +21,6 @@ const Todos = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState([null, null]);
   const [start, end] = filter;
@@ -62,41 +60,17 @@ const Todos = () => {
 
     if (!start || !end) return searchMatch;
 
-    const noteDate = new Date(note.date)
-    
+    const noteDate = new Date(note.date);
 
     return (
-      searchMatch &&
-      noteDate >= new Date(start) &&
-      noteDate <= new Date(end)
+      searchMatch && noteDate >= new Date(start) && noteDate <= new Date(end)
     );
   });
 
   return (
     <div className="min-h-dvh bg-gray-100 p-5">
       <div className="flex justify-end p-4">
-        <Avatar
-          name={user?.name}
-          size="40"
-          round={true}
-          colour="#3A5B22"
-          textSizeRatio={2}
-          onClick={() => setMenu(!menu)}
-          className="cursor-pointer"
-        />
-        {menu && (
-          <div className="absolute right-6 top-16 w-40 shadow-lg rounded-lg border">
-            <p className="px-4 py-2 text-sm border-b bg-[#76b14c] rounded-t-xl">
-              {user?.name}
-            </p>
-            <button
-              onClick={handleLogout}
-              className="w-full text-left px-4 py-2 rounded-b-lg bg-red-500 hover:bg-red-600"
-            >
-              Logout
-            </button>
-          </div>
-        )}
+        <UserMenu user={user} onLogout={handleLogout} />
       </div>
       <div className="flex justify-between mb-10 mt-10">
         <p></p>

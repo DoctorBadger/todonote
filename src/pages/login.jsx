@@ -20,7 +20,9 @@ function Login() {
     return pattern.test(email);
   }
 
-  function handleLogin() {
+  function handleLogin(e) {
+    e.preventDefault();
+
     if (!email.trim()) {
       toast.error("Please enter your email");
       return;
@@ -56,47 +58,46 @@ function Login() {
       <p className="text-medium text-sm mb-14">
         Enter your credentials to access your account
       </p>
+      <form onSubmit={handleLogin}>
+        <label className="text-sm text-medium">Email address</label>
+        <input
+          className="w-full border rounded-lg p-2 mt-1 mb-4 outline-none focus:ring-2 focus:ring-green-600 border-gray-400 drop-shadow-2xl opacity-50"
+          value={email}
+          placeholder="Enter your email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <label className="text-sm text-medium">Email address</label>
+        <div className="flex justify-between items-center mb-1">
+          <label className="text-xs text-medium">Password</label>
 
-      <input
-        className="w-full border rounded-lg p-2 mt-1 mb-4 outline-none focus:ring-2 focus:ring-green-600 border-gray-400 drop-shadow-2xl opacity-50"
-        value={email}
-        placeholder="Enter your email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
+          <Link
+            to="/forgotpassword"
+            className="text-xs font-medium text-[#0C2A92]"
+          >
+            forgot password
+          </Link>
+        </div>
 
-      <div className="flex justify-between items-center mb-1">
-        <label className="text-xs text-medium">Password</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full border rounded-lg p-2 mt-1 mb-4 border-gray-400 drop-shadow-2xl outline-none focus:ring-2 focus:ring-green-600 opacity-50"
+          placeholder="Enter your password"
+        />
 
-        <Link
-          to="/forgotpassword"
-          className="text-xs font-medium text-[#0C2A92]"
+        <div className="flex items-center mb-5">
+          <input type="checkbox" className="mr-2 accent-green-700" />
+          <p className="text-xs text-medium">Remember for 30 days</p>
+        </div>
+
+        <button
+          onClick={handleLogin}
+          className="w-full bg-[#3A5B22] text-white py-2 rounded-lg hover:bg-green-900 transition mb-6"
         >
-          forgot password
-        </Link>
-      </div>
-
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full border rounded-lg p-2 mt-1 mb-4 border-gray-400 drop-shadow-2xl outline-none focus:ring-2 focus:ring-green-600 opacity-50"
-        placeholder="Enter your password"
-      />
-
-      <div className="flex items-center mb-5">
-        <input type="checkbox" className="mr-2 accent-green-700" />
-        <p className="text-xs text-medium">Remember for 30 days</p>
-      </div>
-
-      <button
-        onClick={handleLogin}
-        className="w-full bg-[#3A5B22] text-white py-2 rounded-lg hover:bg-green-900 transition mb-6"
-      >
-        Login
-      </button>
-
+          Login
+        </button>
+      </form>
       <div className="flex items-center mb-6">
         <div className="grow h-px bg-gray-300"></div>
         <span className="px-3 text-medium text-xs">Or</span>
@@ -123,9 +124,7 @@ function Login() {
 
       <p className="text-xs text-black text-center">
         Don't have an account?
-        <Link 
-        className="text-[#0C2A92] font-medium ml-1" 
-        to="/signup">
+        <Link className="text-[#0C2A92] font-medium ml-1" to="/signup">
           Sign Up
         </Link>
       </p>
