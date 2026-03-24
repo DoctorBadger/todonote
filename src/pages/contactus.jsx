@@ -9,16 +9,37 @@ function ContactUs() {
     message: "",
   });
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const MAX_WORDS = 300;
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "message") {
+      const trimmed = value.trim();
+
+      const words = trimmed ? trimmed.split(/\s+/) : [];
+
+      if (words.length > MAX_WORDS) return;
+
+      setForm({
+        ...form,
+        [name]: value,
+      });
+    } else {
+      setForm({
+        ...form,
+        [name]: value,
+      });
+    }
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  const wordCount = form.message.trim()
+  ? form.message.trim().split(/\s+/).length
+  : 0;
 
   return (
     <AuthLayout>
@@ -110,6 +131,8 @@ function ContactUs() {
             rows={4}
             fullWidth
             required
+            helperText={`${wordCount}/${MAX_WORDS} words`}
+            error={wordCount===MAX_WORDS}
             sx={{
               "& .MuiOutlinedInput-root": {
                 borderRadius: "12px",

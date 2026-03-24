@@ -43,15 +43,15 @@ function Navbar() {
         </div>
 
         {!scrolled && (
-          <div className="flex">
+          <div className="flex gap-1">
             <button
-              className="link px-4 py-2 bg-[#485C11] text-white rounded-full mx-1 cursor-pointer"
+              className="p font-bold mt-6 px-5 py-3 bg-[#dfecc6] text-[#000000] rounded-full hover:text-white hover:bg-[#485C11] hover:opacity-70 cursor-pointer"
               onClick={() => navigate("/signup")}
             >
               Signup
             </button>
             <button
-              className="link px-4 py-2 bg-[#485C11] text-white rounded-full mx-1 cursor-pointer"
+              className="p font-bold mt-6 px-5 py-3 bg-[#dfecc6] text-[#000000] rounded-full hover:text-white hover:bg-[#485C11] hover:opacity-70 cursor-pointer"
               onClick={() => navigate("/login")}
             >
               Login

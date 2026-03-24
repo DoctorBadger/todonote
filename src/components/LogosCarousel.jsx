@@ -22,7 +22,7 @@ function LogosCarousel() {
     },
     [
       AutoScroll({
-        speed: 1,
+        speed: 0.5,
         stopOnInteraction: false,
         stopOnMouseEnter: true,
       }),

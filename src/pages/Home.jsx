@@ -7,10 +7,10 @@ import Specs from "../homepage/Specs";
 import How from "../homepage/How";
 import Contact from "../homepage/Contact";
 import Footer from "../homepage/Footer";
+import TopFab from "../components/TopFab";
 
 function Home() {
   useEffect(() => {
-    
     window.history.replaceState(null, "", window.location.pathname);
     window.scrollTo(0, 0);
   }, []);
@@ -28,6 +28,7 @@ function Home() {
       <How />
       <Contact />
       <Footer />
+      <TopFab />
     </motion.div>
   );
 }
