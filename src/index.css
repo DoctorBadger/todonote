@@ -4,6 +4,16 @@
   --font-display: "Crimson Text", serif;
   --font-body: "DM Sans", sans-serif;
   --font-mono: "Roboto Mono", monospace;
+  --animate-shimmer: shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @layer components {

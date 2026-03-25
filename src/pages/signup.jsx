@@ -5,6 +5,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { signup } from "../app/authSlice";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 function Signup() {
   const navigate = useNavigate();
@@ -100,15 +102,36 @@ function Signup() {
           />
 
           <div className="flex items-center mb-6">
-            <input
-              type="checkbox"
-              checked={remember}
-              onChange={(e) => setRemember(e.target.checked)}
-              className="mr-2 w-4 h-4  rounded "
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={remember}
+                  onChange={(e) => setRemember(e.target.checked)}
+                  sx={{
+                    padding: 0,
+                    marginRight: "2px",
+                    color: "#15803d",
+                    "&.Mui-checked": {
+                      color: "#15803d",
+                    },
+                  }}
+                />
+              }
+              label={
+                <span>
+                  I agree to the <u>terms & policy</u>
+                </span>
+              }
+              sx={{
+                margin: 0,
+                "& .MuiFormControlLabel-label": {
+                  fontFamily: '"Poppins", sans-serif',
+                  fontSize: "0.75rem",
+                  lineHeight: 1.5,
+                  fontWeight: 500,
+                },
+              }}
             />
-            <p className="text-xs text-medium">
-              I agree to the <u>terms & policy</u>
-            </p>
           </div>
 
           <button

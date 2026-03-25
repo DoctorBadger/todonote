@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../app/authSlice";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 function Login() {
   const navigate = useNavigate();
@@ -82,13 +84,33 @@ function Login() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full border rounded-lg p-2 mt-1 mb-4 border-gray-400 drop-shadow-2xl outline-none focus:ring-2 focus:ring-green-600 opacity-50"
+          className="w-full border rounded-lg p-2 mt-1 mb-3 border-gray-400 drop-shadow-2xl outline-none focus:ring-2 focus:ring-green-600 opacity-50"
           placeholder="Enter your password"
         />
 
-        <div className="flex items-center mb-5">
-          <input type="checkbox" className="mr-2 accent-green-700" />
-          <p className="text-xs text-medium">Remember for 30 days</p>
+        <div className="flex items-center mb-4">
+          <FormControlLabel
+            control={
+              <Checkbox
+                sx={{
+                  paddingX:1,
+                  color: "#15803d",
+                  "&.Mui-checked": {
+                    color: "#15803d",
+                  },
+                }}
+              />
+            }
+            label="Remember for 30 days"
+            sx={{
+              "& .MuiFormControlLabel-label": {
+                fontFamily: '"Poppins", sans-serif',
+                lineHeight: 1.5,
+                fontWeight: 500,
+                fontSize: "0.75rem",
+              },
+            }}
+          />
         </div>
 
         <button
