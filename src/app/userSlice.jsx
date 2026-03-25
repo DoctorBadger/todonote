@@ -1,3 +1,4 @@
+import { add } from "@dnd-kit/utilities";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -31,6 +32,10 @@ const userSlice = createSlice({
       state.loading = false;
       state.users.push(action.payload);
     },
+    addUserFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     updateUserRequest: (state) => {
       state.loading = true;
       state.error = null;
@@ -42,6 +47,10 @@ const userSlice = createSlice({
         state.users[index] = action.payload;
       }
     },
+    updateUserFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     deleteUserRequest: (state) => {
       state.loading = true;
       state.error = null;
@@ -49,6 +58,10 @@ const userSlice = createSlice({
     deleteUserSuccess: (state, action) => {
       state.loading = false;
       state.users = state.users.filter((u) => u.id !== action.payload);
+    },
+    deleteUserFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     },
   },
 });
@@ -59,10 +72,13 @@ export const {
   fetchUsersFailure,
   addUserRequest,
   addUserSuccess,
+  addUserFailure,
   updateUserRequest,
   updateUserSuccess,
+  updateUserFailure,
   deleteUserRequest,
   deleteUserSuccess,
+  deleteUserFailure,
 } = userSlice.actions;
 
 export default userSlice.reducer;

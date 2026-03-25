@@ -5,10 +5,13 @@ import {
   fetchUsersFailure,
   addUserRequest,
   addUserSuccess,
+  addUserFailure,
   updateUserRequest,
   updateUserSuccess,
+  updateUserFailure,
   deleteUserRequest,
   deleteUserSuccess,
+  deleteUserFailure,
 } from "./userSlice";
 
 const BASE_URL = "https://dummyjson.com/users";
