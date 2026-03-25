@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { slideUp } from "../animations/variants";
 import { useNavigate } from "react-router-dom";
+
 function Contact() {
   const navigate=useNavigate();
   return (

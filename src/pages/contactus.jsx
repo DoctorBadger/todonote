@@ -32,14 +32,14 @@ function ContactUs() {
       });
     }
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
   const wordCount = form.message.trim()
-  ? form.message.trim().split(/\s+/).length
-  : 0;
+    ? form.message.trim().split(/\s+/).length
+    : 0;
 
   return (
     <AuthLayout>
@@ -108,6 +108,8 @@ function ContactUs() {
                 borderRadius: "12px",
               },
               fontFamily: "Poppins, sans-serif",
+              lineHeight: 1.5,
+              fontWeight: 500,
               fontSize: "14px",
             }}
           />
@@ -132,12 +134,14 @@ function ContactUs() {
             fullWidth
             required
             helperText={`${wordCount}/${MAX_WORDS} words`}
-            error={wordCount===MAX_WORDS}
+            error={wordCount === MAX_WORDS}
             sx={{
               "& .MuiOutlinedInput-root": {
                 borderRadius: "12px",
               },
               fontFamily: "Poppins, sans-serif",
+              lineHeight: 1.5,
+              fontWeight: 500,
               fontSize: "14px",
             }}
           />

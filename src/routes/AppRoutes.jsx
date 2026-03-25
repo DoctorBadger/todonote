@@ -8,6 +8,7 @@ import ForgotPassword from "../pages/forgotpassword";
 import ResetPassword from "../pages/resetpassword";
 import Pdf from "../pages/pdf";
 import ContactUs from "../pages/contactus";
+import Admin from "../pages/Admin";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 function AppRoutes() {
@@ -20,6 +21,7 @@ function AppRoutes() {
       <Route path="/resetpassword" element={<ResetPassword />} />
       <Route path="/contactus" element={<ContactUs/>}/>
       <Route path="/pdf" element={<Pdf />} />
+      <Route path="/admin" element={<Admin />} />
 
       <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />

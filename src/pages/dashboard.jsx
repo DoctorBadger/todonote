@@ -21,6 +21,10 @@ const Dashboard = () => {
     return;
   }
 
+  function naviAdmin() {
+    navigate("/admin");
+  }
+
   return (
     <div className="relative h-dvh lg:overflow-hidden overflow-y-auto overflow-x-hidden">
       <div
@@ -30,7 +34,7 @@ const Dashboard = () => {
 
       <div className="relative min-h-dvh mt-4 pb-28">
         <div className="flex justify-end p-4">
-          <UserMenu user={user} onLogout={handleLogout} />
+          <UserMenu user={user} onLogout={handleLogout} onNavigateAdmin={naviAdmin} />
         </div>
         <p className="text-6xl font-medium text-center text-black/70 mb-10 mt-10 drop-shadow-6xl">
           Dashboard

@@ -1,9 +1,8 @@
 import { Avatar, Menu, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
 
-function UserMenu({ user, onLogout }) {
+function UserMenu({ user, onLogout, onNavigateAdmin }) {
   const [anchorEl, setAnchorEl] = useState(null);
-
   const open = Boolean(anchorEl);
 
   const handleOpen = (e) => {
@@ -70,6 +69,22 @@ function UserMenu({ user, onLogout }) {
         >
           <Typography fontSize={16} fontWeight={600}>
             {user?.name}
+          </Typography>
+        </MenuItem>
+
+        <MenuItem
+          onClick={onNavigateAdmin}
+          sx={{
+            borderRadius: "10px",
+            mb: 0.5,
+            justifyContent: "center",
+            "&.Mui-disabled": {
+              opacity: 1,
+            },
+          }}
+        >
+          <Typography fontSize={16} fontWeight={600}>
+            Admin
           </Typography>
         </MenuItem>
 
