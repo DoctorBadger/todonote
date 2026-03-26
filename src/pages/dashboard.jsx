@@ -34,7 +34,11 @@ const Dashboard = () => {
 
       <div className="relative min-h-dvh mt-4 pb-28">
         <div className="flex justify-end p-4">
-          <UserMenu user={user} onLogout={handleLogout} onNavigateAdmin={naviAdmin} />
+          <UserMenu
+            user={user}
+            onLogout={handleLogout}
+            onNavigateAdmin={naviAdmin}
+          />
         </div>
         <p className="text-6xl font-medium text-center text-black/70 mb-10 mt-10 drop-shadow-6xl">
           Dashboard
@@ -59,7 +63,7 @@ const Dashboard = () => {
         <div className="flex absolute bottom-14 right-6">
           <button
             onClick={() => navigate("/todos")}
-            className="bg-[#3A5B22] hover:bg-[#2f4a1a] text-white px-5 py-2 rounded-lg transition"
+            className="p font-bold px-8 py-3 bg-[#dfecc6] text-[#000000] rounded-full hover:text-white hover:bg-[#485C11] hover:opacity-70 cursor-pointer"
           >
             See All
           </button>

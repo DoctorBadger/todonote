@@ -32,6 +32,10 @@ const Todos = () => {
     return;
   }
 
+  function naviAdmin() {
+    navigate("/admin");
+  }
+
   function handleDragEnd(event) {
     const { active, over } = event;
 
@@ -70,7 +74,11 @@ const Todos = () => {
   return (
     <div className="min-h-dvh bg-gray-100 p-5">
       <div className="flex justify-end p-4">
-        <UserMenu user={user} onLogout={handleLogout} />
+        <UserMenu
+          user={user}
+          onLogout={handleLogout}
+          onNavigateAdmin={naviAdmin}
+        />
       </div>
       <div className="flex justify-between mb-10 mt-10">
         <p></p>

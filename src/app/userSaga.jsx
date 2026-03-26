@@ -16,7 +16,8 @@ import {
 
 const BASE_URL = "https://dummyjson.com/users";
 
-// API CALLS
+const getIp = () => fetch("https://api.ipify.org?format=json").then((res) => res.json());
+
 const fetchUsersApi = () =>
   fetch(BASE_URL).then((res) => res.json());
 
@@ -39,7 +40,6 @@ const deleteUserApi = (id) =>
     method: "DELETE",
   }).then((res) => res.json());
 
-// SAGAS
 function* fetchUsersHandler() {
   try {
     const data = yield call(fetchUsersApi);
@@ -51,7 +51,9 @@ function* fetchUsersHandler() {
 
 function* addUserHandler(action) {
   try {
-    const data = yield call(addUserApi, action.payload);
+    const ipData = yield call(getIp);
+    const userWithIp = { ...action.payload, ip: ipData.ip };
+    const data = yield call(addUserApi, userWithIp);
     yield put(addUserSuccess(data));
   } catch (e) {
     yield put(addUserFailure(e.message));
@@ -76,7 +78,6 @@ function* deleteUserHandler(action) {
   }
 }
 
-// WATCHER
 export default function* userSaga() {
   yield takeLatest(fetchUsersRequest.type, fetchUsersHandler);
   yield takeLatest(addUserRequest.type, addUserHandler);
