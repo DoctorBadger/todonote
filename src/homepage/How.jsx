@@ -9,52 +9,70 @@ function How() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className=" px-4 sm:px-6 md:px-12"
+        className="px-4 sm:px-6 md:px-12 py-16 sm:py-24"
       >
+        {/* HEADER */}
         <motion.div
           variants={slideUp}
           transition={{ duration: 0.5 }}
-          className="flex justify-between"
+          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
         >
-          <p className="h1">Map Your Success</p>
-          <button className="p font-bold mt-6 px-5 py-5 bg-[#dfecc6] text-[#000000] rounded-full hover:text-white hover:bg-[#485C11] hover:opacity-70 cursor-pointer">
+          <p className="h1 text-center sm:text-left">Map Your Success</p>
+
+          <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-[#dfecc6] text-black rounded-full font-bold hover:text-white hover:bg-[#485C11] transition">
             Discover More
           </button>
         </motion.div>
-        <div className="h-px bg-gray-300 mt-20"></div>
+
+        <div className="h-px bg-gray-300 mt-10 sm:mt-20"></div>
+
+        {/* STEPS */}
         <div
-          style={{ fontFamily: "DM Sans", fontSize: "80px", lineHeight: 1 }}
-          className="grid grid-cols-3"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 mt-10"
+          style={{ fontFamily: "DM Sans" }}
         >
-          <motion.div variants={slideUp} transition={{ duration: 0.5 }}>
-            <p className="text-[#929292] my-10">01</p>
-            <h3 className="h3 my-10">Get Started</h3>
-            <p className="p my-10 text-[#6F6F6F]">
-              With our intuitive setup, you’re up and running in minutes.
-            </p>
-          </motion.div>
-          <motion.div variants={slideUp} transition={{ duration: 0.5 }}>
-            <p className="text-[#929292] my-10">02</p>
-            <h3 className="h3 my-10">Customize and Configure</h3>
-            <p className="p my-10 text-[#6F6F6F]">
-              Adapt Area to your specific requirements and preferences.
-            </p>
-          </motion.div>
-          <motion.div variants={slideUp} transition={{ duration: 0.5 }}>
-            <p className="text-[#929292] my-10">03</p>
-            <h3 className="h3 my-10">Grow Your Business</h3>
-            <p className="p my-10 text-[#6F6F6F]">
-              Make informed decisions to exceed your goals.
-            </p>
-          </motion.div>
+          {[
+            {
+              num: "01",
+              title: "Get Started",
+              text: "With our intuitive setup, you’re up and running in minutes.",
+            },
+            {
+              num: "02",
+              title: "Customize and Configure",
+              text: "Adapt Area to your specific requirements and preferences.",
+            },
+            {
+              num: "03",
+              title: "Grow Your Business",
+              text: "Make informed decisions to exceed your goals.",
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              variants={slideUp}
+              transition={{ duration: 0.5 }}
+            >
+              <p className="text-[#929292] text-3xl sm:text-5xl lg:text-6xl my-6 sm:my-10">
+                {item.num}
+              </p>
+
+              <h3 className="h3 my-4 sm:my-6">{item.title}</h3>
+
+              <p className="p text-[#6F6F6F]">{item.text}</p>
+            </motion.div>
+          ))}
         </div>
+
+        {/* IMAGE */}
         <motion.div variants={slideUp} transition={{ duration: 0.5 }}>
           <img
             src="/landscape.jpg"
-            className="rounded-4xl mt-15 object-cover w-full h-200"
+            className="rounded-3xl mt-12 sm:mt-16 w-full max-h-[400px] sm:max-h-[500px] object-cover"
           />
         </motion.div>
-        <div className="h-px bg-gray-300 mt-20"></div>
+
+        <div className="h-px bg-gray-300 mt-12 sm:mt-20"></div>
       </motion.div>
     </section>
   );
