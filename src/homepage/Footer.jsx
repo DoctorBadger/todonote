@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className=" px-12 pb-8">
+    <footer className=" px-4 sm:px-6 md:px-12 pb-8">
 
       <div className="flex gap-8 text-sm font-medium mb-16">
         <a href="#benefits" className="cursor-pointer hover:opacity-70">Benefits</a>

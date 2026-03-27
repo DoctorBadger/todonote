@@ -4,7 +4,7 @@ import { slideUp, staggerContainer } from "../animations/variants";
 function Benefits() {
   return (
     <section id="benefits">
-      <div className="py-24 px-12">
+      <div className="px-4 sm:px-6 md:px-12 py-24">
         <motion.div
           variants={slideUp}
           initial="hidden"

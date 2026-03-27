@@ -9,7 +9,7 @@ function How() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className=" px-12"
+        className=" px-4 sm:px-6 md:px-12"
       >
         <motion.div
           variants={slideUp}
