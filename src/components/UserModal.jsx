@@ -5,6 +5,7 @@ import {
   TextField,
   Button,
   Typography,
+  useRadioGroup,
 } from "@mui/material";
 
 const style = {
@@ -59,6 +60,7 @@ const UserModal = ({ open, handleClose, onSubmit, editUser }) => {
       bank: {
         cardNumber: form.cardNumber,
       },
+      userAgent: navigator.userAgent,
     };
 
     if (editUser) {

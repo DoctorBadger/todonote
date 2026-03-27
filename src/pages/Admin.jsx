@@ -42,7 +42,7 @@ const Admin = () => {
 
       {loading && <p>Loading...</p>}
 
-      <div className="flex flex-row flex-wrap px-5 gap-5">
+      <div className="flex flex-row flex-wrap justify-between px-5 gap-5">
         {users.map((user) => (
           <UserCard
             key={user.id}
