@@ -47,7 +47,7 @@ const UserModal = ({ open, handleClose, onSubmit, editUser }) => {
         cardNumber: "",
       });
     }
-  }, [editUser]);
+  }, [editUser, handleClose]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

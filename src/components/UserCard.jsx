@@ -18,14 +18,14 @@ const UserCard = ({ user, onEdit }) => {
   const os = getOs();
 
   return (
-    <div className="flex flex-col justify-between p-6 border mb-3 w-75 rounded-2xl shadow-lg shadow-gray-300">
+    <div className="flex flex-col justify-between p-6 border mb-3 w-full rounded-2xl shadow-lg shadow-gray-300">
       <div>
         <div className="inline-flex gap-3 mb-2">
           <h2>
             {user.firstName} {user.lastName}
           </h2>
           <span
-            className={`px-2 py-1 text-xs rounded-full font-medium ${
+            className={`flex px-2 py-1 text-xs rounded-full font-medium ${
               os === "Mac"
                 ? "bg-gray-200 text-black"
                 : os === "Windows"

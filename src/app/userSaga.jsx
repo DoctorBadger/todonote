@@ -16,7 +16,13 @@ import {
 
 const BASE_URL = "https://dummyjson.com/users";
 
-const getIp = () => fetch("https://api.ipify.org?format=json").then((res) => res.json());
+const fetchIPDetails = async () => {
+    const response = await fetch("https://ipapi.co/json");
+    if (!response.ok) {
+        throw new Error("Failed to fetch IP data");
+    }
+    return response.json();
+};
 
 const fetchUsersApi = () =>
   fetch(BASE_URL).then((res) => res.json());
@@ -51,8 +57,8 @@ function* fetchUsersHandler() {
 
 function* addUserHandler(action) {
   try {
-    const ipData = yield call(getIp);
-    const userWithIp = { ...action.payload, ip: ipData.ip };
+    const ipData = yield call(fetchIPDetails);
+    const userWithIp = { ...action.payload, ip: ipData.ip, address: { city: ipData.city, country: ipData.country } };
     const data = yield call(addUserApi, userWithIp);
     yield put(addUserSuccess(data));
   } catch (e) {

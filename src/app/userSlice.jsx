@@ -30,7 +30,7 @@ const userSlice = createSlice({
     },
     addUserSuccess: (state, action) => {
       state.loading = false;
-      state.users.push(action.payload);
+      state.users.unshift(action.payload);
     },
     addUserFailure: (state, action) => {
       state.loading = false;

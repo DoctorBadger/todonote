@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsersRequest, addUserRequest, updateUserRequest } from "../app/userSlice";
+import {
+  fetchUsersRequest,
+  addUserRequest,
+  updateUserRequest,
+} from "../app/userSlice";
 import UserCard from "../components/UserCard";
 import UserModal from "../components/UserModal";
 
@@ -25,24 +29,36 @@ const Admin = () => {
 
   return (
     <div className="p-6">
-      <div className="flex items-center justify-between mb-4 px-5">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4 px-2 sm:px-5">
         <p></p>
-        <h1 className="text-xl mb-4 text-center">Admin Dashboard</h1>
+        <h1 className="text-lg sm:text-xl text-center sm:text-left">
+          Admin Dashboard
+        </h1>
 
         <button
           onClick={() => {
             setEditUser(null);
             setOpen(true);
           }}
-          className="p font-bold px-5 py-2 bg-[#dfecc6] text-[#000000] rounded-full hover:text-white hover:bg-[#485C11] hover:opacity-70 cursor-pointer"
+          className="fixed top-4 right-8 z-50 
+             px-3 py-2 rounded-full 
+             bg-[#dfecc6] text-black font-bold 
+             shadow-lg hover:bg-[#485C11] hover:text-white 
+             transition-all duration-200"
         >
-          Add User
+          + Add User
         </button>
       </div>
 
       {loading && <p>Loading...</p>}
 
-      <div className="flex flex-row flex-wrap justify-between px-5 gap-5">
+      <div
+        className="px-2 sm:px-5 grid gap-4 
+                grid-cols-1 
+                sm:grid-cols-2 
+                md:grid-cols-3 
+                lg:grid-cols-4"
+      >
         {users.map((user) => (
           <UserCard
             key={user.id}
