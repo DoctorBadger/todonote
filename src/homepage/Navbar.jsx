@@ -6,10 +6,12 @@ import { navbarAnim } from "../animations/variants";
 function Navbar() {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 100);
+      setShowMenu(false);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -56,7 +58,7 @@ function Navbar() {
 
         {/* BUTTONS */}
         {!scrolled && (
-          <div className=" sm:flex gap-2">
+          <div className="hidden md:flex gap-2">
             <button
               className="p font-bold px-4 py-2 text-sm sm:text-base bg-[#dfecc6] rounded-full hover:text-white hover:bg-[#485C11]"
               onClick={() => navigate("/signup")}
@@ -71,7 +73,82 @@ function Navbar() {
             </button>
           </div>
         )}
+
+        <div className="md:hidden">
+          <button
+            onClick={() => setShowMenu(!showMenu)}
+            className="text-2xl font-bold"
+          >
+            {showMenu ? "✕" : "☰"}
+          </button>
+        </div>
       </div>
+
+      {showMenu && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute top-full mt-2 w-[90%] max-w-sm bg-white/90 backdrop-blur-lg shadow-lg rounded-2xl border border-gray-200 p-6 flex flex-col gap-5 md:hidden"
+        >
+          <a
+            href="#benefits"
+            className="font-semibold border-b pb-2"
+            onClick={() => setShowMenu(false)}
+          >
+            Benefits
+          </a>
+
+          <a
+            href="#specs"
+            className="font-semibold border-b pb-2"
+            onClick={() => setShowMenu(false)}
+          >
+            Specifications
+          </a>
+
+          <a
+            href="#how"
+            className="font-semibold border-b pb-2"
+            onClick={() => setShowMenu(false)}
+          >
+            How-To
+          </a>
+
+          <a
+            href="#contact"
+            className="font-semibold"
+            onClick={() => setShowMenu(false)}
+          >
+            Contact Us
+          </a>
+
+          {/* BUTTON */}
+
+
+          {/* AUTH BUTTONS */}
+          <div className="flex gap-2 mt-2">
+            <button
+              className="flex-1 px-4 py-2 bg-[#dfecc6] rounded-full hover:bg-[#485C11] hover:text-white transition"
+              onClick={() => {
+                setShowMenu(false);
+                navigate("/signup");
+              }}
+            >
+              Signup
+            </button>
+
+            <button
+              className="flex-1 px-4 py-2 bg-[#dfecc6] rounded-full hover:bg-[#485C11] hover:text-white transition"
+              onClick={() => {
+                setShowMenu(false);
+                navigate("/login");
+              }}
+            >
+              Login
+            </button>
+          </div>
+        </motion.div>
+      )}
     </motion.div>
   );
 }

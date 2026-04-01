@@ -54,7 +54,7 @@ function LogosCarousel() {
       </div>
 
       <button
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 p-2 shadow-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 p-2 shadow-lg rounded-full opacity-100 group-hover:opacity-100 transition-opacity"
         onClick={scrollPrev}
       >
         <svg
@@ -73,7 +73,7 @@ function LogosCarousel() {
       </button>
 
       <button
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 p-2 shadow-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 p-2 shadow-lg rounded-full opacity-100 group-hover:opacity-100 transition-opacity"
         onClick={scrollNext}
       >
         <svg

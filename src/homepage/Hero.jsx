@@ -12,7 +12,7 @@ function Hero() {
       transition={{ duration: 0.7, delay: 0.2 }}
       className="pt-35 px-4 sm:px-6 md:px-12 text-center"
     >
-      <p className="display display text-[100px] sm:text-[70px] md:text-[110px] lg:text-[150px] leading-none tracking-tight flex-wrap justify-center">
+      <p className="display text-[75px] md:text-[110px] lg:text-[150px] leading-none tracking-tight flex-wrap justify-center">
         Browse everything.
       </p>
 

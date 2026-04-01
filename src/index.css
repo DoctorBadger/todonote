@@ -45,6 +45,7 @@
     font-family: var(--font-body);
     font-size: 15px;
     line-height: 1.4;
+    font-weight: 100;
   }
 
   .link {
@@ -81,6 +82,10 @@
 
 .backface-hidden {
   backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
 }
 
 html {

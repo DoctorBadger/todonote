@@ -5,7 +5,11 @@ import {
   TextField,
   Button,
   Typography,
-  useRadioGroup,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
 } from "@mui/material";
 
 const style = {
@@ -25,7 +29,7 @@ const UserModal = ({ open, handleClose, onSubmit, editUser }) => {
     firstName: "",
     lastName: "",
     age: "",
-    gender: "",
+    gender: "male", // default value
     cardNumber: "",
   });
 
@@ -35,7 +39,7 @@ const UserModal = ({ open, handleClose, onSubmit, editUser }) => {
         firstName: editUser.firstName || "",
         lastName: editUser.lastName || "",
         age: editUser.age || "",
-        gender: editUser.gender || "",
+        gender: editUser.gender || "male",
         cardNumber: editUser.bank?.cardNumber || "",
       });
     } else {
@@ -43,7 +47,7 @@ const UserModal = ({ open, handleClose, onSubmit, editUser }) => {
         firstName: "",
         lastName: "",
         age: "",
-        gender: "",
+        gender: "male",
         cardNumber: "",
       });
     }
@@ -111,14 +115,6 @@ const UserModal = ({ open, handleClose, onSubmit, editUser }) => {
           />
 
           <TextField
-            label="Gender"
-            name="gender"
-            value={form.gender}
-            onChange={handleChange}
-            fullWidth
-          />
-
-          <TextField
             label="Card Number"
             name="cardNumber"
             value={form.cardNumber}
@@ -126,22 +122,53 @@ const UserModal = ({ open, handleClose, onSubmit, editUser }) => {
             fullWidth
           />
 
+          <FormControl>
+            <FormLabel
+              sx={{
+                fontFamily: '"Poppins", sans-serif',
+                fontSize: "14px",
+                mb: 1,
+              }}
+            >
+              Gender
+            </FormLabel>
+
+            <RadioGroup
+              row
+              name="gender"
+              value={form.gender}
+              onChange={handleChange}
+            >
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel
+                value="female"
+                control={<Radio />}
+                label="Female"
+              />
+              <FormControlLabel
+                value="other"
+                control={<Radio />}
+                label="Other"
+              />
+            </RadioGroup>
+          </FormControl>
+
           <Button
             variant="contained"
             onClick={handleSubmit}
             sx={{
-            backgroundColor: "#dfecc6",
-            color: "#000000",
-            fontFamily: "Poppins, sans-serif",
-            "&:hover": {
-              backgroundColor: "#485c11",
-              color: "white",
-            },
-            paddingY: "10px",
-            textTransform: "none",
-            fontSize: "14px",
-            borderRadius: "12px",
-          }}
+              backgroundColor: "#dfecc6",
+              color: "#000000",
+              fontFamily: "Poppins, sans-serif",
+              "&:hover": {
+                backgroundColor: "#485c11",
+                color: "white",
+              },
+              paddingY: "10px",
+              textTransform: "none",
+              fontSize: "14px",
+              borderRadius: "12px",
+            }}
           >
             {editUser ? "Update" : "Add"}
           </Button>

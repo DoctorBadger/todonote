@@ -28,55 +28,53 @@ const Admin = () => {
   };
 
   return (
-    <div className="p-6">
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4 px-2 sm:px-5">
-        <p></p>
-        <h1 className="text-lg sm:text-xl text-center sm:text-left">
-          Admin Dashboard
-        </h1>
-
+    <div>
+      <div className="w-full flex items-end justify-end px-6 py-4 bg-white fixed">
         <button
           onClick={() => {
             setEditUser(null);
             setOpen(true);
           }}
-          className="fixed top-4 right-8 z-50 
-             px-3 py-2 rounded-full 
-             bg-[#dfecc6] text-black font-bold 
-             shadow-lg hover:bg-[#485C11] hover:text-white 
-             transition-all duration-200"
+          className="px-3 py-2 rounded-full bg-[#dfecc6] text-black font-bold shadow-lg hover:bg-[#485C11] hover:text-white transition-all duration-200"
         >
           + Add User
         </button>
       </div>
+      <div className="p-6">
+        <div className="flex flex-col mt-15 sm:flex-row items-center justify-center gap-3 mb-4 px-2 sm:px-5">
+          <p className="display text-4xl text-center font-normal">
+            Admin Dashboard
+          </p>
+        </div>
 
-      {loading && <p>Loading...</p>}
+        {loading && <p>Loading...</p>}
 
-      <div
-        className="px-2 sm:px-5 grid gap-4 
+        <div
+          className="px-2 sm:px-5 grid gap-4 
                 grid-cols-1 
                 sm:grid-cols-2 
                 md:grid-cols-3 
                 lg:grid-cols-4"
-      >
-        {users.map((user) => (
-          <UserCard
-            key={user.id}
-            user={user}
-            onEdit={() => {
-              setEditUser(user);
-              setOpen(true);
-            }}
-          />
-        ))}
-      </div>
+        >
+          {users.map((user) => (
+            <UserCard
+              key={user.id}
+              user={user}
+              onEdit={() => {
+                setEditUser(user);
+                setOpen(true);
+              }}
+            />
+          ))}
+        </div>
 
-      <UserModal
-        open={open}
-        handleClose={() => setOpen(false)}
-        onSubmit={handleSubmit}
-        editUser={editUser}
-      />
+        <UserModal
+          open={open}
+          handleClose={() => setOpen(false)}
+          onSubmit={handleSubmit}
+          editUser={editUser}
+        />
+      </div>
     </div>
   );
 };
