@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { CircularProgress } from "@mui/material";
 import {
   fetchUsersRequest,
   addUserRequest,
@@ -29,7 +30,7 @@ const Admin = () => {
 
   return (
     <div>
-      <div className="w-full flex items-end justify-end px-6 py-4 bg-white fixed">
+      <div className="w-full z-50 top-0 flex items-end justify-end px-6 py-4 bg-white fixed">
         <button
           onClick={() => {
             setEditUser(null);
@@ -47,7 +48,11 @@ const Admin = () => {
           </p>
         </div>
 
-        {loading && <p>Loading...</p>}
+        {loading && (
+          <div className="absolute inset-0 bg-white/60 flex justify-center items-center z-50">
+            <CircularProgress />
+          </div>
+        )}
 
         <div
           className="px-2 sm:px-5 grid gap-4 

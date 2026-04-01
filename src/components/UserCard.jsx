@@ -1,11 +1,13 @@
 import { useDispatch } from "react-redux";
 import { deleteUserRequest } from "../app/userSlice";
+import DeleteModal from "./DeleteModal";
 import { useState } from "react";
 import { a, useSpring } from "@react-spring/web";
 
 const UserCard = ({ user, onEdit }) => {
   const dispatch = useDispatch();
   const [flipped, setFlipped] = useState(false);
+  const [deleteUser, setDeleteUser] = useState(false);
 
   const getOs = () => {
     if (!user.userAgent) return "Unknown";
@@ -19,6 +21,11 @@ const UserCard = ({ user, onEdit }) => {
   };
 
   const os = getOs();
+
+  function handleDelete(e) {
+    e.stopPropagation();
+    setDeleteUser(true);
+  }
 
   const { transform } = useSpring({
     transform: `rotateY(${flipped ? 180 : 0}deg) translateZ(0)`,
@@ -35,14 +42,13 @@ const UserCard = ({ user, onEdit }) => {
           transform,
           transformStyle: "preserve-3d",
         }}
-        className="relative w-full h-[260px] will-change-transform"
+        className="relative w-full h-65 will-change-transform"
       >
         {/* FRONT SIDE */}
         <div
           style={{ backfaceVisibility: "hidden" }}
           className="absolute w-full h-full rounded-2xl shadow-2xl bg-white overflow-hidden"
         >
-
           {user.gender === "male" && (
             <div className="relative h-32.5 w-full overflow-hidden">
               <img
@@ -135,27 +141,27 @@ const UserCard = ({ user, onEdit }) => {
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
           }}
-          className="absolute w-full h-full p-6 rounded-2xl shadow-2xl bg-white flex flex-col justify-between"
+          className="absolute border border-gray-200 w-full h-full p-6 rounded-2xl shadow-2xl bg-white flex flex-col justify-between"
         >
+          <div className="absolute -top-3 -left-3  rounded-lg shadow-md flex items-center justify-center">
+            <span
+              className={`absolute top-0 left-0 px-3 py-3 text-xs rounded-lg font-medium ${
+                os === "Mac"
+                  ? "bg-gray-200 text-black"
+                  : os === "Windows"
+                    ? "bg-blue-100 text-blue-700"
+                    : os === "Android"
+                      ? "bg-green-100 text-green-700"
+                      : os === "iOS"
+                        ? "bg-purple-100 text-purple-700"
+                        : "bg-gray-100 text-gray-500"
+              }`}
+            >
+              {os}
+            </span>
+          </div>
 
-          <span
-            className={`absolute top-0 left-0 px-3 py-1 text-xs font-medium ${
-              os === "Mac"
-                ? "bg-gray-200 text-black"
-                : os === "Windows"
-                  ? "bg-blue-100 text-blue-700"
-                  : os === "Android"
-                    ? "bg-green-100 text-green-700"
-                    : os === "iOS"
-                      ? "bg-purple-100 text-purple-700"
-                      : "bg-gray-100 text-gray-500"
-            }`}
-          >
-            {os}
-          </span>
-
-
-          <div>
+          <div className="mt-10 gap-3 flex flex-col">
             <p>Card: {user.bank?.cardNumber || "N/A"}</p>
             <p>
               Location:{" "}
@@ -177,10 +183,7 @@ const UserCard = ({ user, onEdit }) => {
             </button>
 
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                dispatch(deleteUserRequest(user.id));
-              }}
+              onClick={handleDelete}
               className="px-4 py-2 bg-[#dfecc6] rounded-full hover:bg-[#485C11] hover:text-white transition"
             >
               Delete
@@ -188,6 +191,21 @@ const UserCard = ({ user, onEdit }) => {
           </div>
         </div>
       </a.div>
+      {deleteUser===true &&(
+        <DeleteModal
+        message={
+          <>
+          Are you sure you want to delete{" "}
+          <span className="font-bold">{user.firstName} {user.lastName}</span>
+          </>
+        }
+        onCancel={()=>setDeleteUser(false)}
+        onConfirm={()=>{
+          dispatch(deleteUserRequest(user.id))
+          setDeleteUser(false)
+        }}
+        />
+      )}
     </div>
   );
 };
