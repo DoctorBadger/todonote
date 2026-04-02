@@ -49,7 +49,6 @@ function Specs() {
           </button>
         </motion.div>
 
-        {/* TABLE (SCROLL FIX) */}
         <motion.div
           variants={slideUp}
           initial="hidden"
@@ -58,7 +57,6 @@ function Specs() {
           transition={{ duration: 0.7 }}
           className="mt-12 sm:mt-20 border border-gray-200 rounded-2xl overflow-hidden"
         >
-          {/* 👇 KEY FIX */}
           <div className="overflow-x-auto">
             <div className="min-w-[600px]">
               {/* HEADER */}

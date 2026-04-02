@@ -10,7 +10,7 @@ const todoSlice = createSlice({
   reducers: {
     addNote: {
       reducer: (state, action) => {
-        state.notes.push(action.payload);
+        state.notes.unshift(action.payload);
       },
       prepare: (title, items, urgent = "false") => {
         return {

@@ -3,6 +3,7 @@ import { deleteUserRequest } from "../app/userSlice";
 import DeleteModal from "./DeleteModal";
 import { useState } from "react";
 import { a, useSpring } from "@react-spring/web";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const UserCard = ({ user, onEdit }) => {
   const dispatch = useDispatch();
@@ -163,10 +164,11 @@ const UserCard = ({ user, onEdit }) => {
 
           <div className="mt-10 gap-3 flex flex-col">
             <p>Card: {user.bank?.cardNumber || "N/A"}</p>
-            <p>
-              Location:{" "}
+
+            <p className="flex items-center gap-2">
+              <LocationOnIcon style={{ fontSize: 18, color: "#6b7280" }} />
               {user.address
-                ? `${user.address.city}, ${user.address.country}`
+                ? `: ${" "} ${user.address.city}, ${user.address.country}`
                 : "N/A"}
             </p>
           </div>
@@ -191,19 +193,21 @@ const UserCard = ({ user, onEdit }) => {
           </div>
         </div>
       </a.div>
-      {deleteUser===true &&(
+      {deleteUser === true && (
         <DeleteModal
-        message={
-          <>
-          Are you sure you want to delete{" "}
-          <span className="font-bold">{user.firstName} {user.lastName}</span>
-          </>
-        }
-        onCancel={()=>setDeleteUser(false)}
-        onConfirm={()=>{
-          dispatch(deleteUserRequest(user.id))
-          setDeleteUser(false)
-        }}
+          message={
+            <>
+              Are you sure you want to delete{" "}
+              <span className="font-bold">
+                {user.firstName} {user.lastName}
+              </span>
+            </>
+          }
+          onCancel={() => setDeleteUser(false)}
+          onConfirm={() => {
+            dispatch(deleteUserRequest(user.id));
+            setDeleteUser(false);
+          }}
         />
       )}
     </div>

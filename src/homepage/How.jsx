@@ -28,7 +28,7 @@ function How() {
 
         {/* STEPS */}
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 mt-10"
+          className="grid grid-cols-3 overflow-x-auto gap-8 sm:gap-10 mt-10"
           style={{ fontFamily: "DM Sans" }}
         >
           {[
