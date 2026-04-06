@@ -28,7 +28,7 @@ const Dashboard = () => {
   return (
     <div className="relative h-dvh lg:overflow-hidden overflow-y-auto overflow-x-hidden">
       <div
-        className="absolute inset-0 bg-cover bg-center scale-105"
+        className="absolute inset-0 bg-cover bg-center scale-250"
         style={{ backgroundImage: `url(${bg})` }}
       />
 

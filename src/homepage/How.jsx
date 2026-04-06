@@ -68,7 +68,7 @@ function How() {
         <motion.div variants={slideUp} transition={{ duration: 0.5 }}>
           <img
             src="/landscape.jpg"
-            className="rounded-3xl mt-12 sm:mt-16 w-full max-h-[400px] sm:max-h-[500px] object-cover"
+            className="rounded-3xl mt-12 sm:mt-16 w-full h-175 md:h-200 object-cover"
           />
         </motion.div>
 

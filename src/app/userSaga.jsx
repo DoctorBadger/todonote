@@ -17,7 +17,7 @@ import {
 const BASE_URL = "https://dummyjson.com/users";
 
 const fetchIPDetails = async () => {
-    const {response} = await fetch("https://ipapi.co/json");
+    const response = await fetch("https://ipapi.co/json");
     if (!response.ok) {
         throw new Error("Failed to fetch IP data");
     }

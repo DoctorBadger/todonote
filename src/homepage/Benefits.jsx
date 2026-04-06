@@ -80,7 +80,7 @@ function Benefits() {
           >
             <img
               src="/mountain.jpg"
-              className="w-full rounded-3xl object-cover max-h-[400px] sm:max-h-[500px]"
+              className="w-full rounded-3xl object-cover md:h-200 h-175"
             />
           </motion.div>
         </motion.div>
@@ -96,7 +96,7 @@ function Benefits() {
         >
           {/* TEXT */}
           <div className="w-full">
-            <div className="h-px bg-gray-300 mt-6 sm:mt-10"></div>
+            <div className="h-px bg-gray-300 "></div>
 
             <h2 className="h1 mt-10 sm:mt-20 mb-4">See the Big Picture</h2>
 
@@ -132,7 +132,7 @@ function Benefits() {
           <div className="w-full flex justify-center">
             <img
               src="/cylinders.jpg"
-              className="rounded-3xl w-full max-h-[500px] object-cover"
+              className="rounded-3xl w-full h-125 md:h-200 object-cover"
             />
           </div>
         </motion.div>

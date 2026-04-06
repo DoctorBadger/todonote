@@ -35,12 +35,10 @@ function Navbar() {
             : "w-full px-8 py-4"
         }`}
       >
-        {/* LOGO */}
         {!scrolled && (
           <h1 className="p text-lg sm:text-2xl mr-4 md:mr-24">Area</h1>
         )}
 
-        {/* NAV LINKS */}
         <div className="hidden md:flex gap-6">
           <a href="#benefits" className="link font-bold">
             Benefits
@@ -56,7 +54,6 @@ function Navbar() {
           </a>
         </div>
 
-        {/* BUTTONS */}
         {!scrolled && (
           <div className="hidden md:flex gap-2">
             <button
@@ -88,11 +85,11 @@ function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute top-full mt-2 w-[90%] max-w-sm bg-white/90 backdrop-blur-lg shadow-lg rounded-2xl border border-gray-200 p-6 flex flex-col gap-5 md:hidden"
+          className="absolute top-full mt-2 w-full bg-white/90 backdrop-blur-lg shadow-lg rounded-2xl border border-gray-200 p-6 flex flex-col gap-5 md:hidden"
         >
           <a
             href="#benefits"
-            className="font-semibold border-b pb-2"
+            className="font-semibold border-b border-gray-200 pb-2"
             onClick={() => setShowMenu(false)}
           >
             Benefits
@@ -100,7 +97,7 @@ function Navbar() {
 
           <a
             href="#specs"
-            className="font-semibold border-b pb-2"
+            className="font-semibold border-b border-gray-200 pb-2"
             onClick={() => setShowMenu(false)}
           >
             Specifications
@@ -108,7 +105,7 @@ function Navbar() {
 
           <a
             href="#how"
-            className="font-semibold border-b pb-2"
+            className="font-semibold border-b border-gray-200 pb-2"
             onClick={() => setShowMenu(false)}
           >
             How-To
@@ -122,10 +119,6 @@ function Navbar() {
             Contact Us
           </a>
 
-          {/* BUTTON */}
-
-
-          {/* AUTH BUTTONS */}
           <div className="flex gap-2 mt-2">
             <button
               className="flex-1 px-4 py-2 bg-[#dfecc6] rounded-full hover:bg-[#485C11] hover:text-white transition"

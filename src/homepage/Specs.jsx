@@ -58,7 +58,7 @@ function Specs() {
           className="mt-12 sm:mt-20 border border-gray-200 rounded-2xl overflow-hidden"
         >
           <div className="overflow-x-auto">
-            <div className="min-w-[600px]">
+            <div className="min-w-150">
               {/* HEADER */}
               <div className="grid grid-cols-3 text-center border-b border-gray-400">
                 <div className="p-4 font-medium text-lg sm:text-xl bg-white">
@@ -124,13 +124,13 @@ function Specs() {
             <img
               src="/stone.jpg"
               alt="visual"
-              className="w-full max-h-[400px] sm:max-h-[500px] object-cover rounded-3xl"
+              className="w-full md:h-175 h-100 object-cover rounded-3xl"
             />
           </div>
 
           {/* TEXT */}
           <div>
-            <p className="h2 leading-relaxed mb-6">
+            <p className="h2 md:leading-relaxed mb-6">
               “I was skeptical, but Area has completely transformed the way I
               manage my business. The data visualizations are so clear and
               intuitive, and the platform is so easy to use. I can't imagine
